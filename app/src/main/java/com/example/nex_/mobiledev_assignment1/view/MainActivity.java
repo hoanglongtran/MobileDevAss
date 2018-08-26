@@ -60,8 +60,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         final Button button = (Button) findViewById(R.id.buttonTest);
-
         button.setOnClickListener(myController.getInstance());
+        final Button button2 = (Button) findViewById(R.id.buttonTest2);
+        button2.setOnClickListener(myController.getInstance());
     }
 
     @Override
