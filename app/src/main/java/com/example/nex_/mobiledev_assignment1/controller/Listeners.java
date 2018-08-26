@@ -7,18 +7,16 @@ import android.view.View;
 
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.TestTrackingService;
-import com.example.nex_.mobiledev_assignment1.model.trackable.Trackable;
 import com.example.nex_.mobiledev_assignment1.view.AddTrackingActivity;
-import com.example.nex_.mobiledev_assignment1.view.MainActivity;
 import com.example.nex_.mobiledev_assignment1.view.TrackableDetailActivity;
 
-public class myController implements View.OnClickListener {
-    private static final myController ourInstance = new myController();
+public class Listeners implements View.OnClickListener {
+    private static final Listeners ourInstance = new Listeners();
 
-    public static myController getInstance() {
+    public static Listeners getInstance() {
         return ourInstance;
     }
-    private myController() {
+    private Listeners() {
     }
     @Override
     public void onClick(View v) {

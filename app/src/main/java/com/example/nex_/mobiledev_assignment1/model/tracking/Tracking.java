@@ -9,9 +9,9 @@ import java.sql.Time;
 public class Tracking extends AbstrackTracking {
     private int ID;
     private String title;
-    private Time startTime;
-    private Time endTime;
-    private Time meetTime;
+    private String startTime;
+    private String endTime;
+    private String meetTime;
     private Location currentLocation;
     private Location meetLocation;
 
@@ -23,15 +23,15 @@ public class Tracking extends AbstrackTracking {
         return title;
     }
 
-    public Time getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public Time getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public Time getMeetTime() {
+    public String getMeetTime() {
         return meetTime;
     }
 
@@ -51,15 +51,15 @@ public class Tracking extends AbstrackTracking {
         this.title = title;
     }
 
-    public void setStartTime(Time startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
-    public void setMeetTime(Time meetTime) {
+    public void setMeetTime(String meetTime) {
         this.meetTime = meetTime;
     }
 

@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.nex_.mobiledev_assignment1.R;
-import com.example.nex_.mobiledev_assignment1.controller.myController;
+import com.example.nex_.mobiledev_assignment1.controller.Listeners;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         final Button button = (Button) findViewById(R.id.buttonTest);
-        button.setOnClickListener(myController.getInstance());
+        button.setOnClickListener(Listeners.getInstance());
         final Button button2 = (Button) findViewById(R.id.buttonTest2);
-        button2.setOnClickListener(myController.getInstance());
+        button2.setOnClickListener(Listeners.getInstance());
     }
 
     @Override

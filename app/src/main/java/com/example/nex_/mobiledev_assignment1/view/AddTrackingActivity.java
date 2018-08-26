@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.example.nex_.mobiledev_assignment1.controller.myController;
+import com.example.nex_.mobiledev_assignment1.controller.Listeners;
 import com.example.nex_.mobiledev_assignment1.R;
 
 public class AddTrackingActivity extends AppCompatActivity {
@@ -15,6 +15,6 @@ public class AddTrackingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_tracking);
         final Button button = (Button) findViewById(R.id.button25);
 
-        button.setOnClickListener(myController.getInstance());
+        button.setOnClickListener(Listeners.getInstance());
     }
 }

@@ -2,9 +2,11 @@ package com.example.nex_.mobiledev_assignment1.model.trackable;
 
 import android.content.Context;
 
+import com.example.nex_.mobiledev_assignment1.model.CategoryList;
 import com.example.nex_.mobiledev_assignment1.model.TrackingService;
 import com.example.nex_.mobiledev_assignment1.model.trackable.AbstractTrackable;
 
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -17,6 +19,11 @@ public class Trackable extends AbstractTrackable {
     as well as the next location that it will stop into the activity. Date and time except meet time will be input from the system.
     Trackable will also have to read the food_truck_data file and return a trackable list.
      */
+    int ID;
+    String name;
+    String TackableDes;
+    java.net.URL URL;
+    CategoryList category;
     private DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
     private String searchDate;
     private int searchWindow = 5;

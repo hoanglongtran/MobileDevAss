@@ -36,10 +36,14 @@ public class TestTrackingService
                  .getTrackingInfoForTimeRange(date, searchWindow, 0);
          Log.i(LOG_TAG, String.format("Matched Query: %s, +/-%d mins", searchDate, searchWindow));
          trackingService.log(matched);
+         TrackingService.TrackingInfo temp = matched.get(0);
+         String tempString = temp.toString();
+         System.out.println(tempString + "It's over Anakin,I have the high ground");
       }
       catch (ParseException e)
       {
          e.printStackTrace();
       }
+
    }
 }
