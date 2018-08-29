@@ -12,8 +12,7 @@ public class Tracking extends AbstrackTracking {
     private String startTime;
     private String endTime;
     private String meetTime;
-    private Location currentLocation;
-    private Location meetLocation;
+
 
     public int getID() {
         return ID;
@@ -35,39 +34,8 @@ public class Tracking extends AbstrackTracking {
         return meetTime;
     }
 
-    public Location getCurrentLocation() {
-        return currentLocation;
-    }
 
-    public Location getMeetLocation() {
-        return meetLocation;
-    }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setMeetTime(String meetTime) {
-        this.meetTime = meetTime;
-    }
-
-    public void setCurrentLocation(Location currentLocation) {
-        this.currentLocation = currentLocation;
-    }
-
-    public void setMeetLocation(Location meetLocation) {
-        this.meetLocation = meetLocation;
-    }
 }

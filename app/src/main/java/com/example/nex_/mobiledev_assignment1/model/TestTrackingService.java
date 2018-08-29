@@ -21,7 +21,7 @@ public class TestTrackingService
    {
       TrackingService trackingService = TrackingService.getSingletonInstance(context);
       Log.i(LOG_TAG, "Parsed File Contents:");
-      trackingService.logAll();
+      //trackingService.logAll();
 
       try
       {

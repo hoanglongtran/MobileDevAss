@@ -12,61 +12,64 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-public class Trackable extends AbstractTrackable {
-    /*
-    General idea: User make a new tracking event, then pick a Trackable, the tracking class will make a new trackable object read the file
+public class Trackable {
+
+    /*General idea: User make a new tracking event, then pick a Trackable, the tracking class will make a new trackable object read the file
     then return the location to the Trackable object (the trackable should have a setCurrentLocation method) and display the current location
     as well as the next location that it will stop into the activity. Date and time except meet time will be input from the system.
-    Trackable will also have to read the food_truck_data file and return a trackable list.
-     */
-    int ID;
-    String name;
-    String TackableDes;
-    java.net.URL URL;
-    CategoryList category;
-    private DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
-    private String searchDate;
-    private int searchWindow = 5;
-    private int currentLongtitude;
-    private int currentLattitude;
+    Trackable will also have to read the food_truck_data file and return a trackable list.*/
 
+    private int ID;
+    private String name;
+    private String trackableDes;
+    private String URL;
+    private String category;
+    private double currentLongtitude;
+    private double currentLatitude;
+    private double nextStationaryLongtitude;
+    private double nextStationaryLatitude;
 
-    public Trackable(Context context) {
-        getData(context);
+    public Trackable(int ID, String name, String trackableDes, String URL, String category) {
+        this.ID = ID;
+        this.name = name;
+        this.trackableDes = trackableDes;
+        this.URL = URL;
+        this.category = category;
     }
 
-    public void setSearchDate(String searchDate) {
-        this.searchDate = searchDate;
+    public int getID() {
+        return ID;
     }
 
-    public void setSearchWindow(int searchWindow) {
-        this.searchWindow = searchWindow;
+    public String getName() {
+        return name;
     }
-    @Override
-    public double getCurentLongtidue() {
+
+    public String getTackableDes() {
+        return trackableDes;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public double getCurrentLongtitude() {
         return currentLongtitude;
     }
 
-    @Override
-    public double getCurrentLattitude() {
-        return currentLattitude;
+    public double getCurrentLatitude() {
+        return currentLatitude;
     }
 
-    public void getData(Context context)
-    {
-        TrackingService trackingService = TrackingService.getSingletonInstance(context);
-        try
-        {
-            // 5 mins either side of 05/07/2018 1:05:00 PM
-            // PRE: make sure device locale matches provided DateFormat (you can change either device settings or String param)
-            Date date = dateFormat.parse(searchDate);
-            List<TrackingService.TrackingInfo> matched = trackingService
-                    .getTrackingInfoForTimeRange(date, searchWindow, 0);
-            trackingService.log(matched);
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
+    public double getNextStationaryLongtitude() {
+        return nextStationaryLongtitude;
+    }
+
+    public double getNextStationaryLatitude() {
+        return nextStationaryLatitude;
     }
 }

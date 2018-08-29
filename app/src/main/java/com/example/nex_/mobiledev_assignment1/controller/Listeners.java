@@ -7,8 +7,10 @@ import android.view.View;
 
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.TestTrackingService;
+import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 import com.example.nex_.mobiledev_assignment1.view.AddTrackingActivity;
 import com.example.nex_.mobiledev_assignment1.view.TrackableDetailActivity;
+import com.example.nex_.mobiledev_assignment1.view.TrackableListActivity;
 
 public class Listeners implements View.OnClickListener {
     private static final Listeners ourInstance = new Listeners();
@@ -26,9 +28,9 @@ public class Listeners implements View.OnClickListener {
 
             case R.id.buttonTest:
                 // do your code
-                Intent addTracking = new Intent(v.getContext(), AddTrackingActivity.class);
-                v.getContext().startActivity(addTracking);
-                TestTrackingService.test(v.getContext());
+                Intent trackableList = new Intent(v.getContext(), TrackableListActivity.class);
+                v.getContext().startActivity(trackableList);
+                //TestTrackingService.test(v.getContext());
                 break;
             case R.id.buttonTest2:
                 Intent trackableDetail = new Intent(v.getContext(), TrackableDetailActivity.class);
