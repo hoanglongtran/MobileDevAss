@@ -16,15 +16,16 @@ import com.example.nex_.mobiledev_assignment1.view.TrackableDetailActivity;
 
 import java.util.ArrayList;
 
-public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder>{
-    private static final String TAG = "RecycleViewAdapter";
+public class TrackableListRecycleViewAdapter extends RecyclerView.Adapter<TrackableListRecycleViewAdapter.ViewHolder>{
+    private static final String TAG = "TrackableListRecycleViewAdapter";
 
     private ArrayList<String> mTrackableName;
     private ArrayList<String> mTrackableCategory;
+    private String whoCalling;
     private Context mContext;
 
-    public RecycleViewAdapter(ArrayList<String> mTrackableName, ArrayList<String> mTrackableCategory, Context mContext) {
-
+    public TrackableListRecycleViewAdapter(String whoCalling, ArrayList<String> mTrackableName, ArrayList<String> mTrackableCategory, Context mContext) {
+        this.whoCalling = whoCalling;
         this.mTrackableName = mTrackableName;
         this.mTrackableCategory = mTrackableCategory;
         this.mContext = mContext;
@@ -52,6 +53,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 trackableDetail.putExtra("trackable_des", TrackableList.getInstance().getTrackablesList().get(position).getTackableDes());
                 trackableDetail.putExtra("trackable_url", TrackableList.getInstance().getTrackablesList().get(position).getURL());
                 trackableDetail.putExtra("trackable_category", TrackableList.getInstance().getTrackablesList().get(position).getCategory());
+                trackableDetail.putExtra("whoCalled", whoCalling);
                 v.getContext().startActivity(trackableDetail);
             }
         });
@@ -74,5 +76,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             trackableCategory = itemView.findViewById(R.id.trackable_category);
             parentLayout = itemView.findViewById(R.id.trackable_list_item_parent_layout);
         }
+    }
+
+    public void setWhoCalling(String whoCalling) {
+        this.whoCalling = whoCalling;
     }
 }

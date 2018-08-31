@@ -1,21 +1,24 @@
 package com.example.nex_.mobiledev_assignment1.model.tracking;
 
-import android.location.Location;
-
-import com.example.nex_.mobiledev_assignment1.model.tracking.AbstrackTracking;
-
-import java.sql.Time;
-
 public class Tracking extends AbstrackTracking {
-    private int ID;
+    private int trackingID;
+    private int trackableID;
     private String title;
     private String startTime;
     private String endTime;
     private String meetTime;
 
+    Tracking(int trackingID, String title, int trackableID, String startTime, String endTime, String meetTime) {
+        this.trackingID = trackingID;
+        this.title = title;
+        this.trackableID = trackableID;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.meetTime = meetTime;
+    }
 
-    public int getID() {
-        return ID;
+    public int getTrackingID() {
+        return trackingID;
     }
 
     public String getTitle() {

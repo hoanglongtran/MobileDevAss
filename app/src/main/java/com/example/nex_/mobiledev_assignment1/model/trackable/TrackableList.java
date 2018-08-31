@@ -17,7 +17,7 @@ public class TrackableList {
         return trackablesList;
     }
 
-    public TrackableList(){
+    private TrackableList(){
         trackablesList = new ArrayList<>();
         trackableNames = new ArrayList<>();
         trackableCategory = new ArrayList<>();

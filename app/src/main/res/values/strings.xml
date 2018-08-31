@@ -11,6 +11,11 @@
     <string name="trackable_detail">Whatever Details</string>
     <string name="trackable_list">Whatever List</string>
     <string name="tracking_detail">Tracking Event Detail</string>
+    <string name="action_add_event">Add event</string>
+    <string name="action_save">Save</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_about">About</string>
+    <string name="action_cancel">Cancel</string>
 
 
     <!-- Strings related to Settings -->
@@ -85,4 +90,8 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
