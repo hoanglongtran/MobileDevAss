@@ -1,4 +1,4 @@
-package com.example.nex_.mobiledev_assignment1.model;
+package com.example.nex_.mobiledev_assignment1.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
-import com.example.nex_.mobiledev_assignment1.view.TrackingDetailActivity;
 
 import java.util.ArrayList;
 

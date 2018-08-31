@@ -14,10 +14,10 @@ import java.util.List;
 public class TrackingInfoProcessing {
 
     private static final String LOG_TAG = TrackingService.class.getName();
-    private int currentTrackableID;
+    private static int currentTrackableID;
     private static List<TrackingService.TrackingInfo> data;
     private static ArrayList<String> dataString = new ArrayList<>();
-    private ArrayList<String> currentTrackableData;
+    private static ArrayList<String> currentTrackableData;
     private ArrayList<Double> currentLong;
     private ArrayList<Double> currentLat;
     private String currentData;
@@ -41,13 +41,13 @@ public class TrackingInfoProcessing {
             data = trackingService
                     .getTrackingInfoForTimeRange(date, searchWindow, 0);
             Log.i(LOG_TAG, String.format("Matched Query: %s, +/-%d mins", searchDate, searchWindow));
-
+            convertDataToString();
         }
         catch (ParseException e)
         {
             e.printStackTrace();
         }
-        convertDataToString();
+
     }
 
     private static void convertDataToString(){
@@ -56,8 +56,12 @@ public class TrackingInfoProcessing {
         }
     }
 
-    public void setCurrentTrackableData(int currentTrackableID){
-        this.currentTrackableID = currentTrackableID;
+    public static int getCurrentTrackableID() {
+        return currentTrackableID;
+    }
+
+    public static void setCurrentTrackableData(int currentTrackableID){
+        TrackingInfoProcessing.currentTrackableID = currentTrackableID;
         for (int i = 0; i< dataString.size(); i++){
             if (dataString.get(i).contains("trackableId="+currentTrackableID)){
                 currentTrackableData.add(dataString.get(i));

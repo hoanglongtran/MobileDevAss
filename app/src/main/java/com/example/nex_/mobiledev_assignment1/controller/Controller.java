@@ -2,9 +2,16 @@ package com.example.nex_.mobiledev_assignment1.controller;
 
 import android.util.Log;
 
+import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 
-public class TrackablesController {
+public class Controller {
+    private static final Controller ourInstance = new Controller();
+
+    public static Controller getInstance() {
+        return ourInstance;
+    }
+
 
 
     public void initTrackables() {
@@ -16,5 +23,8 @@ public class TrackablesController {
         TrackableList.getInstance().addTrackables(4, "Trackable E", "This is the fifth trackable", "https://store.steampowered.com", "Category C");
     }
 
+    public void setCurrentTrackable(int currentTrackableID){
+        TrackingInfoProcessing.setCurrentTrackableData(currentTrackableID);
+    }
 
 }

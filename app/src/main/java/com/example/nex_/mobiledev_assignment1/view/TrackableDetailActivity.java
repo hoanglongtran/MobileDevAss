@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
+import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.controller.Listeners;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 
@@ -19,26 +20,31 @@ import org.w3c.dom.Text;
 public class TrackableDetailActivity extends ParentActivity {
     private static final String TAG = "TrackableDetailActivity";
     private static String whoCalling;
-    String trackableName;
+    private static int currentTrackableID;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trackable_detail);
         Log.d(TAG, "onCreate: started");
-        System.out.println(TrackableList.getInstance().getTrackablesList().get(0).getName());
-        System.out.println(TrackableList.getInstance().getTrackablesList().get(0).getTackableDes());
-        System.out.println(TrackableList.getInstance().getTrackablesList().get(0).getURL());
-        System.out.println(TrackableList.getInstance().getTrackablesList().get(0).getCategory());
+        getIncomingIntent();
+        System.out.println(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getName());
+        System.out.println(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getTackableDes());
+        System.out.println(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getURL());
+        System.out.println(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getCategory());
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         FloatingActionButton addEventFab = (FloatingActionButton) findViewById(R.id.add_event_fab);
         addEventFab.setOnClickListener(Listeners.getInstance());
         setSupportActionBar(myToolbar);
-        getIncomingIntent();
 
+        System.out.println("Current trackable ID " + currentTrackableID);
 
 
         if (whoCalling != null && whoCalling.equals("ParentActivity")){
             addEventFab.setVisibility(View.VISIBLE);
+            Controller.getInstance().setCurrentTrackable(currentTrackableID);
         }else {
 
         }
@@ -69,9 +75,15 @@ public class TrackableDetailActivity extends ParentActivity {
             String trackableDes = getIntent().getStringExtra("trackable_des");
             String trackableURL = getIntent().getStringExtra("trackable_url");
             String trackableCategory = getIntent().getStringExtra("trackable_category");
+            //currentTrackableID = Integer.parseInt(getIntent().getStringExtra("trackable_id"));
             whoCalling = getIntent().getStringExtra("whoCalled");
             setTrackableDetail(trackableName,trackableDes,trackableURL,trackableCategory);
         }
+        if (getIntent().hasExtra("trackable_id")){
+            currentTrackableID = getIntent().getIntExtra("trackable_id",0);
+            System.out.println("Test " + getIntent().getIntExtra("trackable_id",0));
+        }
+
     }
 
     private void setTrackableDetail(String trackableName, String trackableDes, String trackableURL, String trackableCategory){

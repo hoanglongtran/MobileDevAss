@@ -1,19 +1,15 @@
 package com.example.nex_.mobiledev_assignment1.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
 
 import com.example.nex_.mobiledev_assignment1.R;
-import com.example.nex_.mobiledev_assignment1.controller.TrackablesController;
-import com.example.nex_.mobiledev_assignment1.model.TrackableListRecycleViewAdapter;
+import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 
 import java.util.ArrayList;
@@ -23,7 +19,7 @@ public class TrackableListActivity extends ParentActivity {
 
     private ArrayList<String> mTrackableName = new ArrayList<>();
     private ArrayList<String> mTrackableCategory = new ArrayList<>();
-    private TrackablesController controller = new TrackablesController();
+
     private String caller = "";
     private static Boolean key = true;
 
@@ -36,7 +32,7 @@ public class TrackableListActivity extends ParentActivity {
         Log.d(TAG, "onCreate: started");
         if (key){
             //prevent initialize objects twice
-            controller.initTrackables();
+            Controller.getInstance().initTrackables();
 
             key = false;
         }
@@ -47,8 +43,6 @@ public class TrackableListActivity extends ParentActivity {
 
         if (caller != null && caller.equals("ParentActivity")){
             setTitle("Pick a trackable");
-        }else {
-
         }
         setSupportActionBar(myToolbar);
         initName();
