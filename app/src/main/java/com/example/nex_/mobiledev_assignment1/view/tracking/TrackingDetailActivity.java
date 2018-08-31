@@ -1,4 +1,4 @@
-package com.example.nex_.mobiledev_assignment1.view;
+package com.example.nex_.mobiledev_assignment1.view.tracking;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
+import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
 
 public class TrackingDetailActivity extends ParentActivity {
     private static final String TAG = "TrackingDetailActivity";

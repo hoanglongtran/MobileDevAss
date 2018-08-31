@@ -1,6 +1,6 @@
 package com.example.nex_.mobiledev_assignment1.controller;
 
-import android.util.Log;
+import android.content.Context;
 
 import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
@@ -24,7 +24,15 @@ public class Controller {
     }
 
     public void setCurrentTrackable(int currentTrackableID){
-        TrackingInfoProcessing.setCurrentTrackableData(currentTrackableID);
+        TrackingInfoProcessing.extractCurrentTrackableData(currentTrackableID);
+    }
+
+    public void getData(Context context){
+        TrackingInfoProcessing.getData(context);
+    }
+
+    public void getCurrentLocation(){
+        TrackingInfoProcessing.getCurrentLocation();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.nex_.mobiledev_assignment1.view;
+package com.example.nex_.mobiledev_assignment1.view.trackable;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.controller.Listeners;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
+import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
 
 import org.w3c.dom.Text;
 

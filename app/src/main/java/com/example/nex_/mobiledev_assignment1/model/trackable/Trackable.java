@@ -1,5 +1,7 @@
 package com.example.nex_.mobiledev_assignment1.model.trackable;
 
+import java.util.ArrayList;
+
 public class Trackable {
 
     /*General idea: User make a new tracking event, then pick a Trackable, the tracking class will make a new trackable object read the file
@@ -12,10 +14,12 @@ public class Trackable {
     private String trackableDes;
     private String URL;
     private String category;
-    private double currentLongtitude;
-    private double currentLatitude;
-    private double nextStationaryLongtitude;
-    private double nextStationaryLatitude;
+    private double currentLong;
+    private double currentLat;
+    private ArrayList<Double> meetLong;
+    private ArrayList<Double> meetLat;
+    private String meetTime;
+
 
     Trackable(int trackabelID, String name, String trackableDes, String URL, String category) {
         this.trackabelID = trackabelID;
@@ -45,19 +49,43 @@ public class Trackable {
         return category;
     }
 
-    public double getCurrentLongtitude() {
-        return currentLongtitude;
+    public double getCurrentLong() {
+        return currentLong;
     }
 
-    public double getCurrentLatitude() {
-        return currentLatitude;
+    public double getCurrentLat() {
+        return currentLat;
     }
 
-    public double getNextStationaryLongtitude() {
-        return nextStationaryLongtitude;
+    public void setCurrentLong(double currentLong) {
+        this.currentLong = currentLong;
     }
 
-    public double getNextStationaryLatitude() {
-        return nextStationaryLatitude;
+    public void setCurrentLat(double currentLat) {
+        this.currentLat = currentLat;
+    }
+
+    public ArrayList<Double> getMeetLong() {
+        return meetLong;
+    }
+
+    public void setMeetLong(ArrayList<Double> meetLong) {
+        this.meetLong = meetLong;
+    }
+
+    public ArrayList<Double> getMeetLat() {
+        return meetLat;
+    }
+
+    public void setMeetLat(ArrayList<Double> meetLat) {
+        this.meetLat = meetLat;
+    }
+
+    public String getMeetTime() {
+        return meetTime;
+    }
+
+    public void setMeetTime(String meetTime) {
+        this.meetTime = meetTime;
     }
 }

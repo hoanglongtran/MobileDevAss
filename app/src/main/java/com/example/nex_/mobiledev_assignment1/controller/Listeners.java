@@ -3,23 +3,12 @@ package com.example.nex_.mobiledev_assignment1.controller;
 
 
 import android.content.Intent;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.example.nex_.mobiledev_assignment1.R;
-import com.example.nex_.mobiledev_assignment1.model.TestTrackingService;
-import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
-import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
-import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
 import com.example.nex_.mobiledev_assignment1.view.AddTrackingActivity;
-import com.example.nex_.mobiledev_assignment1.view.TrackableDetailActivity;
-import com.example.nex_.mobiledev_assignment1.view.TrackableListActivity;
-import com.example.nex_.mobiledev_assignment1.view.TrackingListActivity;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableListActivity;
+import com.example.nex_.mobiledev_assignment1.view.tracking.TrackingListActivity;
 
 public class Listeners implements View.OnClickListener  {
     private static final Listeners ourInstance = new Listeners();

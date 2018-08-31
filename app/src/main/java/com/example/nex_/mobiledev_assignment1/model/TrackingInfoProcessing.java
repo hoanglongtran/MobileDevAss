@@ -3,6 +3,8 @@ package com.example.nex_.mobiledev_assignment1.model;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,12 +20,7 @@ public class TrackingInfoProcessing {
     private static List<TrackingService.TrackingInfo> data;
     private static ArrayList<String> dataString = new ArrayList<>();
     private static ArrayList<String> currentTrackableData;
-    private ArrayList<Double> currentLong;
-    private ArrayList<Double> currentLat;
-    private String currentData;
-    private double meetLong;
-    private double meetLat;
-    private double meetTime;
+    private static String currentData;
 
 
     public static void getData(Context context)
@@ -33,7 +30,7 @@ public class TrackingInfoProcessing {
 
         try
         {
-            // 5 mins either side of 05/07/2018 1:05:00 PM
+            //Get and store all tracking info
             DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
             String searchDate = "05/07/2018 1:00:00 PM";
             int searchWindow = 60; // +/- 5 mins
@@ -41,6 +38,8 @@ public class TrackingInfoProcessing {
             data = trackingService
                     .getTrackingInfoForTimeRange(date, searchWindow, 0);
             Log.i(LOG_TAG, String.format("Matched Query: %s, +/-%d mins", searchDate, searchWindow));
+            trackingService.log(data);
+            //Convert all tracking info to string
             convertDataToString();
         }
         catch (ParseException e)
@@ -56,11 +55,9 @@ public class TrackingInfoProcessing {
         }
     }
 
-    public static int getCurrentTrackableID() {
-        return currentTrackableID;
-    }
 
-    public static void setCurrentTrackableData(int currentTrackableID){
+    //Extract the current Trackable info
+    public static void extractCurrentTrackableData(int currentTrackableID){
         TrackingInfoProcessing.currentTrackableID = currentTrackableID;
         for (int i = 0; i< dataString.size(); i++){
             if (dataString.get(i).contains("trackableId="+currentTrackableID)){
@@ -69,27 +66,40 @@ public class TrackingInfoProcessing {
         }
     }
 
+    //Search throught the extracted info and get all the meet location and time
+    public static void getMeetLocation(){
+        for (int i = 0; i< currentTrackableData.size(); i++) {
+            if (Integer.parseInt(currentTrackableData.get(i).replaceAll(".*stopTime=(\\d).*", "")) > 0) {
 
-    public void getLocation(){
+                TrackableList.getInstance().getTrackablesList().get(currentTrackableID)
+                        .getMeetLong().add(Double.parseDouble(currentTrackableData.get(i).replaceAll(".*long=(\\d).*", "")));
+
+                TrackableList.getInstance().getTrackablesList().get(currentTrackableID)
+                        .getMeetLat().add(Double.parseDouble(currentTrackableData.get(i).replaceAll(".*lat=(\\d).*", "")));
+
+            }
+        }
+    }
+
+    //Compare system time with tracking data then extract the location of matching time
+    public static void getCurrentLocation(){
         for (int i = 0; i < currentTrackableData.size(); i++){
             String time = getTime();
             if (currentTrackableData.get(i).contains(time)){
                 currentData = currentTrackableData.get(i);
             }
+            TrackableList.getInstance().getTrackablesList().get(currentTrackableID)
+                    .setCurrentLong(Double.parseDouble(currentData.replaceAll(".*long=(\\d).*", "")));
+            TrackableList.getInstance().getTrackablesList().get(currentTrackableID)
+                    .setCurrentLat(Double.parseDouble(currentData.replaceAll(".*lat=(\\d).*", "")));
         }
-        if (Integer.parseInt(currentData.replaceAll(".*stopTime=(\\d).*", "")) > 0 ){
-            meetLong = Integer.parseInt(currentData.replaceAll(".*long=(\\d).*", ""));
-            meetLat = Integer.parseInt(currentData.replaceAll(".*lat=(\\d).*", ""));
 
-        }else if (Integer.parseInt(currentData.replaceAll(".*stopTime=(\\d).*", "")) == 0 ){
-            currentLong.add(Double.parseDouble(currentData.replaceAll(".*long=(\\d).*", "")));
-            currentLat.add(Double.parseDouble(currentData.replaceAll(".*lat=(\\d).*", "")));
-        }
 
     }
-    private String getTime(){
+
+    private static String getTime(){
         Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
         return df.format(c);
     }
 

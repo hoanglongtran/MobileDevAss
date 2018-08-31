@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.example.nex_.mobiledev_assignment1.R;
+import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableListActivity;
 
 public abstract class ParentActivity extends AppCompatActivity {
     //This abstract class handles all action from every other class on the app bar

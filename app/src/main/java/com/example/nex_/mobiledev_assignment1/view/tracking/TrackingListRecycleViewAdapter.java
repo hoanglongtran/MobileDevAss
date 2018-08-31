@@ -1,4 +1,4 @@
-package com.example.nex_.mobiledev_assignment1.view;
+package com.example.nex_.mobiledev_assignment1.view.tracking;
 
 import android.content.Context;
 import android.content.Intent;

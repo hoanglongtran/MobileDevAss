@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.nex_.mobiledev_assignment1.R;
+import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.controller.Listeners;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -27,6 +28,8 @@ public class MainActivity extends ParentActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Read through the file to get tracking data
+        Controller.getInstance().getData(this);
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +40,9 @@ public class MainActivity extends ParentActivity {
             }
         });*/
 
+        //Add a floating button to get location
+
+        //MapView, used for assignment 2
         mapView = (MapView)findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {

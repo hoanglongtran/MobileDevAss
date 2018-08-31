@@ -7,7 +7,7 @@ import android.view.Menu;
 
 import com.example.nex_.mobiledev_assignment1.R;
 
-public class StationaryPeriodActivity extends ParentActivity {
+public class StationaryPeriodListActivity extends ParentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

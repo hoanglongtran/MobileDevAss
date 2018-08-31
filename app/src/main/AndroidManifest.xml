@@ -40,24 +40,21 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".view.TrackableListActivity"
+            android:name=".view.trackable.TrackableListActivity"
             android:label="@string/trackable_list" />
         <activity
-            android:name=".view.TrackingDetailActivity"
+            android:name=".view.tracking.TrackingDetailActivity"
             android:label="@string/tracking_detail" />
         <activity
             android:name=".view.AddTrackingActivity"
             android:label="@string/add_tracking" />
         <activity
-            android:name=".view.TrackableDetailActivity"
+            android:name=".view.trackable.TrackableDetailActivity"
             android:label="@string/trackable_detail" />
         <activity
-            android:name=".view.TrackingListActivity"
+            android:name=".view.tracking.TrackingListActivity"
             android:label="@string/tracking_list" />
-        <activity
-            android:name=".view.Main2Activity"
-            android:label="@string/title_activity_main2" />
-        <activity android:name=".view.StationaryPeriodActivity"></activity>
+        <activity android:name=".view.StationaryPeriodListActivity"></activity>
     </application>
 
 </manifest>

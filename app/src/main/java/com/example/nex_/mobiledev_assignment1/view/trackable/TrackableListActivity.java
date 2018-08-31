@@ -1,4 +1,4 @@
-package com.example.nex_.mobiledev_assignment1.view;
+package com.example.nex_.mobiledev_assignment1.view.trackable;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +11,7 @@ import android.view.Menu;
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
+import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
 
 import java.util.ArrayList;
 
