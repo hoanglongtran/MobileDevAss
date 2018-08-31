@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.TrackingListRecycleViewAdapter;
+import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
 
 import java.util.ArrayList;
 
@@ -40,18 +41,17 @@ public class TrackingListActivity extends ParentActivity {
         getMenuInflater().inflate(R.menu.action_buttons, menu);
         menu.findItem(R.id.action_save).setVisible(false);
         menu.findItem(R.id.action_edit).setVisible(false);
+        menu.findItem(R.id.action_add_event).setVisible(false);
         menu.findItem(R.id.action_cancel).setVisible(false);
+        menu.findItem(R.id.action_filter).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
     private void initName(){
         Log.d(TAG, "initName: preparing names");
-        mTrackingTitle.add("Hello");
-        mTrackingMeetTime.add("adfas");
-        mTrackingTitle.add("adfasdfxcvx");
-        mTrackingMeetTime.add("vcbser");
-        //mTrackingTitle = TrackableList.getInstance().getTrackableNames();
-        //mTrackingMeetTime = TrackableList.getInstance().getTrackableCategory();
+        TrackingList.getInstance().addTracking(0, "First Tracking Event", 1, "18:00", "12:00", "13:00");
+        mTrackingTitle = TrackingList.getInstance().getTrackingTitle();
+        mTrackingMeetTime = TrackingList.getInstance().getTrackingMeetTime();
         initRecyclerView();
     }
 

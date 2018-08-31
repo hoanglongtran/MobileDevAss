@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
+import com.example.nex_.mobiledev_assignment1.controller.Listeners;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 
 import org.w3c.dom.Text;
@@ -30,7 +31,7 @@ public class TrackableDetailActivity extends ParentActivity {
         System.out.println(TrackableList.getInstance().getTrackablesList().get(0).getCategory());
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         FloatingActionButton addEventFab = (FloatingActionButton) findViewById(R.id.add_event_fab);
-
+        addEventFab.setOnClickListener(Listeners.getInstance());
         setSupportActionBar(myToolbar);
         getIncomingIntent();
 
@@ -50,6 +51,7 @@ public class TrackableDetailActivity extends ParentActivity {
         menu.findItem(R.id.action_edit).setVisible(false);
         menu.findItem(R.id.action_add_event).setVisible(false);
         menu.findItem(R.id.action_cancel).setVisible(false);
+        menu.findItem(R.id.action_filter).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

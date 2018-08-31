@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 import com.example.nex_.mobiledev_assignment1.R;
@@ -44,6 +45,11 @@ public class TrackableListActivity extends ParentActivity {
         caller = getIntent().getStringExtra("caller");
         System.out.println("This is the one who called: " + caller);
 
+        if (caller != null && caller.equals("ParentActivity")){
+            setTitle("Pick a trackable");
+        }else {
+
+        }
         setSupportActionBar(myToolbar);
         initName();
 
@@ -56,6 +62,7 @@ public class TrackableListActivity extends ParentActivity {
         menu.findItem(R.id.action_edit).setVisible(false);
         menu.findItem(R.id.action_add_event).setVisible(false);
         menu.findItem(R.id.action_cancel).setVisible(false);
+        menu.findItem(R.id.action_filter).setVisible(true);
         return super.onCreateOptionsMenu(menu);
     }
 

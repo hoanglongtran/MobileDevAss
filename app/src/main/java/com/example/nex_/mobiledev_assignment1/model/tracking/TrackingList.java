@@ -10,7 +10,8 @@ public class TrackingList {
     }
 
     private ArrayList<Tracking> trackingList;
-    private ArrayList<String> trackingNames;
+    private ArrayList<String> trackingTitle;
+    private ArrayList<String> trackingMeetTime;
 
     public ArrayList<Tracking> getTrackingList() {
         return trackingList;
@@ -18,12 +19,23 @@ public class TrackingList {
 
     private TrackingList(){
         trackingList = new ArrayList<>();
-        trackingNames = new ArrayList<>();
+        trackingTitle = new ArrayList<>();
+        trackingMeetTime = new ArrayList<>();
 
     }
-    public void addTracking(int ID, String title, String startTime, int trackableID, String endTime, String meetTime){
+    public void addTracking(int ID, String title, int trackableID, String startTime, String meetTime,  String endTime){
         Tracking tracking = new Tracking(ID, title, trackableID, startTime, endTime, meetTime);
         trackingList.add(tracking);
+        trackingTitle.add(title);
+        trackingMeetTime.add(meetTime);
 
+    }
+
+    public ArrayList<String> getTrackingTitle() {
+        return trackingTitle;
+    }
+
+    public ArrayList<String> getTrackingMeetTime() {
+        return trackingMeetTime;
     }
 }

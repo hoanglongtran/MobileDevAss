@@ -52,7 +52,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/editText4"
+                android:id="@+id/trackingStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="13dp"
@@ -97,7 +97,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/editText5"
+                android:id="@+id/trackingEndTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="13dp"
@@ -120,7 +120,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/editText6"
+                android:id="@+id/trackingCurrentLocation"
                 android:layout_width="354dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="300dp"
@@ -143,7 +143,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/editText8"
+                android:id="@+id/trackingMeetLocation"
                 android:layout_width="354dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="300dp"

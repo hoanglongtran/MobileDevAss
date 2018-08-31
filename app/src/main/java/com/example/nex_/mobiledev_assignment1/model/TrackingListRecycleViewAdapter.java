@@ -11,9 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
-import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
-import com.example.nex_.mobiledev_assignment1.view.TrackableDetailActivity;
 import com.example.nex_.mobiledev_assignment1.view.TrackingDetailActivity;
 
 import java.util.ArrayList;
@@ -50,10 +48,10 @@ public class TrackingListRecycleViewAdapter extends RecyclerView.Adapter<Trackin
             @Override
             public void onClick(View v) {
                 Intent trackingDetail = new Intent(v.getContext(), TrackingDetailActivity.class);
-                trackingDetail.putExtra("trackable_name", TrackingList.getInstance().getTrackingList().get(position).getTitle());
-                trackingDetail.putExtra("trackable_des", TrackableList.getInstance().getTrackablesList().get(position).getTackableDes());
-                trackingDetail.putExtra("trackable_url", TrackableList.getInstance().getTrackablesList().get(position).getURL());
-                trackingDetail.putExtra("trackable_category", TrackableList.getInstance().getTrackablesList().get(position).getCategory());
+                trackingDetail.putExtra("tracking_title", TrackingList.getInstance().getTrackingList().get(position).getTitle());
+                trackingDetail.putExtra("tracking_start_time", TrackingList.getInstance().getTrackingList().get(position).getStartTime());
+                trackingDetail.putExtra("tracking_meet_time", TrackingList.getInstance().getTrackingList().get(position).getMeetTime());
+                trackingDetail.putExtra("tracking_end_time", TrackingList.getInstance().getTrackingList().get(position).getEndTime());
                 v.getContext().startActivity(trackingDetail);
             }
         });

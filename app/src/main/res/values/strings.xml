@@ -7,16 +7,20 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="add_tracking">Add An Tracking Event</string>
-    <string name="trackable_detail">Whatever Details</string>
-    <string name="trackable_list">Whatever List</string>
-    <string name="tracking_detail">Tracking Event Detail</string>
+    <string name="add_tracking">Add a tracking event</string>
+    <string name="trackable_detail">Whatever detail</string>
+    <string name="trackable_list">Whatever list</string>
+    <string name="tracking_detail">Event detail</string>
     <string name="action_add_event">Add event</string>
     <string name="action_save">Save</string>
     <string name="action_edit">Edit</string>
     <string name="action_about">About</string>
     <string name="action_cancel">Cancel</string>
-
+    <string name="tracking_list">Tracking list</string>
+    <string name="trackable_pick">Pick a trackable</string>
+    <string name="stationary_time_pick">Pick a stationary time</string>
+    <string name="edit_event">Edit event</string>
+    <string name="filter">Filter</string>
 
     <!-- Strings related to Settings -->
 

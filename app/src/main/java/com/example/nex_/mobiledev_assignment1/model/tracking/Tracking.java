@@ -37,8 +37,12 @@ public class Tracking extends AbstrackTracking {
         return meetTime;
     }
 
+    public int getTrackableID() {
+        return trackableID;
+    }
 
-
-
-
+    @Override
+    public void setTrackableID(int trackableID) {
+        this.trackableID = trackableID;
+    }
 }

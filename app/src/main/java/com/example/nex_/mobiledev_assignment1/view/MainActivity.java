@@ -63,6 +63,7 @@ public class MainActivity extends ParentActivity {
         menu.findItem(R.id.action_edit).setVisible(false);
         menu.findItem(R.id.action_add_event).setVisible(false);
         menu.findItem(R.id.action_cancel).setVisible(false);
+        menu.findItem(R.id.action_filter).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

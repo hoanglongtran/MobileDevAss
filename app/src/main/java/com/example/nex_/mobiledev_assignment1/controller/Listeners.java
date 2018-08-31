@@ -14,6 +14,11 @@ import com.example.nex_.mobiledev_assignment1.view.TrackableDetailActivity;
 import com.example.nex_.mobiledev_assignment1.view.TrackableListActivity;
 import com.example.nex_.mobiledev_assignment1.view.TrackingListActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Listeners implements View.OnClickListener  {
     private static final Listeners ourInstance = new Listeners();
 
@@ -29,6 +34,7 @@ public class Listeners implements View.OnClickListener  {
 
             case R.id.buttonTest:
                 // do your code
+
                 Intent trackableList = new Intent(v.getContext(), TrackableListActivity.class);
                 v.getContext().startActivity(trackableList);
                 //TestTrackingService.test(v.getContext());
@@ -37,6 +43,10 @@ public class Listeners implements View.OnClickListener  {
                 Intent trackableDetail = new Intent(v.getContext(), TrackingListActivity.class);
                 v.getContext().startActivity(trackableDetail);
 
+            case R.id.add_event_fab:
+
+                //TODO:
+                //get tracking info from selected trackable;
 
             default:
                 break;
