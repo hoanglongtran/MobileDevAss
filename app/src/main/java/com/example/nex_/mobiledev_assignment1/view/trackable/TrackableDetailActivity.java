@@ -1,22 +1,17 @@
 package com.example.nex_.mobiledev_assignment1.view.trackable;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
-import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.controller.Listeners;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
-
-import org.w3c.dom.Text;
 
 public class TrackableDetailActivity extends ParentActivity {
     private static final String TAG = "TrackableDetailActivity";
@@ -42,7 +37,6 @@ public class TrackableDetailActivity extends ParentActivity {
 
         System.out.println("Current trackable ID " + currentTrackableID);
 
-
         if (whoCalling != null && whoCalling.equals("ParentActivity")){
             addEventFab.setVisibility(View.VISIBLE);
 
@@ -57,13 +51,10 @@ public class TrackableDetailActivity extends ParentActivity {
         menu.findItem(R.id.action_edit).setVisible(false);
         menu.findItem(R.id.action_add_event).setVisible(false);
         menu.findItem(R.id.action_cancel).setVisible(false);
-        menu.findItem(R.id.action_filter).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void setWhoCalling(String whoCalling) {
-        this.whoCalling = whoCalling;
-    }
 
     private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intent");

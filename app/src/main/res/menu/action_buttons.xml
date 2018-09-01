@@ -22,9 +22,10 @@
         android:title="@string/action_edit"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/action_filter"
-        android:title="@string/filter"
-        app:showAsAction="always"/>
+        android:id="@+id/action_search"
+        android:title="@string/search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always" />
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"

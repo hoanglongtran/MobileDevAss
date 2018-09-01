@@ -4,6 +4,10 @@ import android.content.Context;
 
 import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
+import com.example.nex_.mobiledev_assignment1.model.tracking.Tracking;
+import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
+
+import java.util.UUID;
 
 public class Controller {
     private static final Controller ourInstance = new Controller();
@@ -11,8 +15,6 @@ public class Controller {
     public static Controller getInstance() {
         return ourInstance;
     }
-
-
 
     public void initTrackables() {
         System.out.println("initTrackables");
@@ -31,8 +33,11 @@ public class Controller {
         TrackingInfoProcessing.getData(context);
     }
 
-    public void getCurrentLocation(){
-        TrackingInfoProcessing.getCurrentLocation();
+    public void updateTracking(int pickedEvent, String title, int currentTrackableID, String stationaryStartTime, String meetTime, String stationaryEndTime, String meetLocation){
+        Tracking updatedTracking = new Tracking(UUID.randomUUID().toString(),title, currentTrackableID, stationaryStartTime ,meetTime, stationaryEndTime, meetLocation);
+
+        TrackingList.getInstance().getTrackingList().set(pickedEvent, updatedTracking);
+
     }
 
 }

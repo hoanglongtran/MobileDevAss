@@ -1,18 +1,18 @@
 package com.example.nex_.mobiledev_assignment1.view.tracking;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
-import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
+import com.example.nex_.mobiledev_assignment1.controller.Listeners;
+import com.example.nex_.mobiledev_assignment1.view.AddTrackingActivity;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
-
-import org.w3c.dom.Text;
 
 public class TrackingDetailActivity extends ParentActivity {
     private static final String TAG = "TrackingDetailActivity";
@@ -21,6 +21,8 @@ public class TrackingDetailActivity extends ParentActivity {
     private String trackingEndTime;
     private String trackingMeetTime;
     private String trackingMeetLocation;
+    private String trackingCurrentLocation;
+    private static int pickedEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,8 @@ public class TrackingDetailActivity extends ParentActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         getIncomingIntent();
+        Button track = (Button) findViewById(R.id.track);
+        track.setOnClickListener(Listeners.getInstance());
     }
 
     @Override
@@ -38,10 +42,28 @@ public class TrackingDetailActivity extends ParentActivity {
         menu.findItem(R.id.action_edit).setVisible(true);
         menu.findItem(R.id.action_add_event).setVisible(false);
         menu.findItem(R.id.action_cancel).setVisible(false);
-        menu.findItem(R.id.action_filter).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit:
+                isEdit = true;
+                Intent edit = new Intent(this, AddTrackingActivity.class);
+                edit.putExtra("title", trackingTitle);
+                edit.putExtra("start_time", trackingStartTime);
+                edit.putExtra("meet_time", trackingMeetTime);
+                edit.putExtra("end_time", trackingEndTime);
+                edit.putExtra("meet_location", trackingMeetLocation);
+                edit.putExtra("picked_event", pickedEvent);
+                startActivity(edit);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     private void getIncomingIntent(){
 
@@ -55,6 +77,7 @@ public class TrackingDetailActivity extends ParentActivity {
              trackingEndTime = getIntent().getStringExtra("tracking_end_time");
              trackingMeetTime = getIntent().getStringExtra("tracking_meet_time");
              trackingMeetLocation = getIntent().getStringExtra("tracking_meet_location");
+             pickedEvent = getIntent().getIntExtra("picked_event", 0);
             setTrackingDetail(trackingTitle,trackingStartTime,trackingMeetTime,trackingEndTime,trackingMeetLocation);
         }
 
@@ -93,5 +116,9 @@ public class TrackingDetailActivity extends ParentActivity {
 
     public String getTrackingMeetLocation() {
         return trackingMeetLocation;
+    }
+
+    public static int getPickedEvent() {
+        return pickedEvent;
     }
 }

@@ -7,15 +7,18 @@
     tools:context=".view.AddTrackingActivity">
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
+        app:layout_anchor="@+id/nestedScrollView"
+        app:layout_anchorGravity="bottom|center"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView7"
@@ -57,10 +60,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="13dp"
                 android:layout_marginStart="16dp"
-                android:textSize="18sp"
                 android:layout_marginTop="7dp"
                 android:hint="Start Time"
-                android:inputType="time" />
+                android:inputType="time"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -81,9 +84,8 @@
                 android:layout_marginEnd="13dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:textSize="18sp"
                 android:hint="Add Meet Time"
-                 />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/timePicker"
@@ -111,9 +113,9 @@
                 android:layout_marginEnd="13dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:textSize="18sp"
                 android:hint="End Time"
-                android:inputType="time" />
+                android:inputType="time"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -152,7 +154,7 @@
 
             <TextView
                 android:id="@+id/addMeetLocation"
-                android:layout_width="354dp"
+                android:layout_width="226dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="300dp"
                 android:layout_marginStart="16dp"
@@ -160,6 +162,16 @@
                 android:ems="10"
                 android:hint="Meet Location"
                 android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/deleteEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="end|bottom"
+                android:text="Delete"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="invisible" />
 
 
         </LinearLayout>

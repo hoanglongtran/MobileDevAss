@@ -1,16 +1,19 @@
 package com.example.nex_.mobiledev_assignment1.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
+import com.example.nex_.mobiledev_assignment1.view.tracking.TrackingListActivity;
 
 import java.util.ArrayList;
 
@@ -48,8 +51,28 @@ public class StationaryPeriodListActivity extends ParentActivity {
         menu.findItem(R.id.action_edit).setVisible(false);
         menu.findItem(R.id.action_add_event).setVisible(false);
         menu.findItem(R.id.action_cancel).setVisible(true);
-        menu.findItem(R.id.action_filter).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(false);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_cancel:
+                StationaryPeriodListActivity.getmStationaryEndTime().clear();
+                StationaryPeriodListActivity.getmStationaryStart().clear();
+                StationaryPeriodListActivity.getmStationaryLat().clear();
+                StationaryPeriodListActivity.getmStationaryLong().clear();
+                Intent cancel = new Intent(this, TrackingListActivity.class);
+                cancel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(cancel);
+                finish();
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

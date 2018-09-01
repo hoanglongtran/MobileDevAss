@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -127,25 +128,35 @@ public class TrackingInfoProcessing {
     }
 
     //Compare system time with tracking data then extract the location of matching time
-    public static void getCurrentLocation(){
+    public static String getCurrentLocation(){
+        String longitude = "";
+        String latitude = "";
+        String time = getTime();
         for (int i = 0; i < currentTrackableData.size(); i++){
-            String time = getTime();
-            if (currentTrackableData.get(i).contains(time)){
-                currentData = currentTrackableData.get(i);
+
+            Pattern currentTimeRegex = Pattern.compile(".*" + time + ".*");
+            Matcher match = currentTimeRegex.matcher(currentTrackableData.get(i));
+            if (match.find()){
+                Matcher currentLong = longitudeRegex.matcher(currentTrackableData.get(i));
+                Matcher currentLat = latitudeRegex.matcher(currentTrackableData.get(i));
+                if(currentLong.find()) {
+                    longitude = currentLong.group(1);
+                }
+                if (currentLat.find()) {
+                    latitude = currentLat.group(1);
+                }
             }
-            TrackableList.getInstance().getTrackablesList().get(currentTrackableID)
-                    .setCurrentLong(Double.parseDouble(currentData.replaceAll(".*long=(\\d).*", "")));
-            TrackableList.getInstance().getTrackablesList().get(currentTrackableID)
-                    .setCurrentLat(Double.parseDouble(currentData.replaceAll(".*lat=(\\d).*", "")));
+
         }
+        String currentLocation = latitude +", "+longitude;
+        currentTrackableData.clear();
 
-
+        return currentLocation;
     }
 
     private static String getTime(){
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
-        return df.format(c);
+        return "1:10";
+        //return new SimpleDateFormat("h:mm").format(new java.util.Date());
     }
 
     public static int getCurrentTrackableID() {

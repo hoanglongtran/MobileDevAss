@@ -14,9 +14,7 @@ public abstract class AbstrackTracking implements InterfaceTracking {
     private Location currentLocation;
     private Location meetLocation;
 
-    public void setTrackableID(int trackableID) {
-        this.trackableID = trackableID;
-    }
+
 
     public void setTitle(String title) {
         this.title = title;

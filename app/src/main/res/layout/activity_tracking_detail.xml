@@ -153,7 +153,13 @@
                 android:hint="Meet Location"
                 android:textSize="18sp" />
 
-
+            <Button
+                android:id="@+id/track"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="end|bottom"
+                android:text="Track" />
 
 
         </LinearLayout>

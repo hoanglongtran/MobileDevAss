@@ -20,7 +20,7 @@
     <string name="trackable_pick">Pick a trackable</string>
     <string name="stationary_time_pick">Pick a stationary time</string>
     <string name="edit_event">Edit event</string>
-    <string name="filter">Filter</string>
+    <string name="search">Search</string>
 
     <!-- Strings related to Settings -->
 

@@ -1,27 +1,37 @@
 package com.example.nex_.mobiledev_assignment1.view.tracking;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
+import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableListActivity;
 
 import java.util.ArrayList;
 
 public class TrackingListActivity extends ParentActivity {
     private static final String TAG = "TrackableListActivity";
 
-    private ArrayList<String> mTrackingTitle = new ArrayList<>();
-    private ArrayList<String> mTrackingMeetTime = new ArrayList<>();
+    private static ArrayList<String> mTrackingTitle = new ArrayList<>();
+    private static ArrayList<String> mTrackingMeetTime = new ArrayList<>();
     //private Controller controller = new Controller();
 
 
+    public static ArrayList<String> getmTrackingTitle() {
+        return mTrackingTitle;
+    }
+
+    public static ArrayList<String> getmTrackingMeetTime() {
+        return mTrackingMeetTime;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +51,21 @@ public class TrackingListActivity extends ParentActivity {
         menu.findItem(R.id.action_edit).setVisible(false);
         menu.findItem(R.id.action_add_event).setVisible(true);
         menu.findItem(R.id.action_cancel).setVisible(false);
-        menu.findItem(R.id.action_filter).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(false);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add_event:
+                Intent intent = new Intent(this, TrackableListActivity.class);
+                intent.putExtra("caller", "ParentActivity");
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void initName(){

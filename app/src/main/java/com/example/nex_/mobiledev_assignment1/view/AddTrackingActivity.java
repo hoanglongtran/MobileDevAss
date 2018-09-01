@@ -1,10 +1,8 @@
 package com.example.nex_.mobiledev_assignment1.view;
 
-import android.app.Activity;
 import android.app.TimePickerDialog;
-import android.support.design.widget.Snackbar;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
@@ -13,13 +11,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.controller.Listeners;
 import com.example.nex_.mobiledev_assignment1.R;
-
-import org.w3c.dom.Text;
+import com.example.nex_.mobiledev_assignment1.model.tracking.Tracking;
+import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
+import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableDetailActivity;
+import com.example.nex_.mobiledev_assignment1.view.tracking.TrackingListActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,16 +31,26 @@ import java.util.Locale;
 
 public class AddTrackingActivity extends ParentActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "AddTrackingActivity";
-    private static int clickedPosition = 0;
-    Calendar startTimeLimit;
-    Calendar endTimeLimit;
-    Calendar meetTime;
+    private static int pickedEvent = 0;
+    private String title;
+    private String stationaryStartTime;
+    private String currentMeetTime;
+    private String stationaryEndTime;
+    private String stationaryLong;
+    private String stationaryLat;
+    private String meetLocation;
+    private Calendar startTimeLimit;
+    private Calendar endTimeLimit;
+    private Calendar meetTime;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tracking);
+        if (isEdit){
+            setTitle("Edit");
+        }
         getIncomingIntent();
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -47,8 +59,10 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
         //button.setOnClickListener(Listeners.getInstance());
 
         //Calling this from Listener class will cause java.lang.IllegalStateException
+        Button delete = (Button) findViewById(R.id.deleteEvent);
         if (isEdit){
-            setTitle("Edit");
+            delete.setVisibility(View.VISIBLE);
+            delete.setOnClickListener(Listeners.getInstance());
         }
 
         Button button = (Button) findViewById(R.id.timePicker);
@@ -76,23 +90,23 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
         TextView meetTime = (TextView) findViewById(R.id.addMeetTIme);
         meetTime.setText(mStringGetTime);
 
-            startTimeLimit = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yy h:mm:ss aa", Locale.ENGLISH);
-            try {
-                startTimeLimit.setTime(sdf.parse(stationaryStartTime));
-            }catch (ParseException e) {
-                e.printStackTrace();
-            }
+        startTimeLimit = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yy h:mm:ss aa", Locale.ENGLISH);
+        try {
+            startTimeLimit.setTime(sdf.parse(stationaryStartTime));
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
 
-            endTimeLimit = Calendar.getInstance();
-            //SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa", Locale.ENGLISH);
-            try {
-                endTimeLimit.setTime(sdf.parse(stationaryEndTime));
-            }catch (ParseException e) {
-                e.printStackTrace();
-            }
+        endTimeLimit = Calendar.getInstance();
+        //SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa", Locale.ENGLISH);
+        try {
+            endTimeLimit.setTime(sdf.parse(stationaryEndTime));
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         int before = startTimeLimit.get(Calendar.HOUR_OF_DAY)*100 + startTimeLimit.get(Calendar.MINUTE);
         int after = endTimeLimit.get(Calendar.HOUR_OF_DAY)*100 + endTimeLimit.get(Calendar.MINUTE);
@@ -125,8 +139,60 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
         menu.findItem(R.id.action_edit).setVisible(false);
         menu.findItem(R.id.action_add_event).setVisible(false);
         menu.findItem(R.id.action_cancel).setVisible(true);
-        menu.findItem(R.id.action_filter).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(false);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                if (isEdit){
+                    EditText addTitle = (EditText) findViewById(R.id.addTitle);
+                    TextView addMeetTIme = (TextView) findViewById(R.id.addMeetTIme);
+                    String title = addTitle.getText().toString();
+                    int currentTrackableID = TrackableDetailActivity.getCurrentTrackableID();
+                    String meetTime = addMeetTIme.getText().toString();
+                    //Update the tracking list
+                    Controller.getInstance().updateTracking(pickedEvent, title, currentTrackableID, stationaryStartTime,meetTime,stationaryEndTime,meetLocation);
+
+                    TrackingListActivity.getmTrackingTitle().set(pickedEvent, title);
+                    TrackingListActivity.getmTrackingMeetTime().set(pickedEvent, meetTime);
+                    isEdit = false;
+                    Intent goBack = new Intent(this, TrackingListActivity.class);
+                    goBack.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(goBack);
+                    finish();
+                    return true;
+                }
+                //Save input item and create a tracking even object
+                EditText addTitle = (EditText) findViewById(R.id.addTitle);
+                TextView addMeetTIme = (TextView) findViewById(R.id.addMeetTIme);
+                String title = addTitle.getText().toString();
+                int currentTrackableID = TrackableDetailActivity.getCurrentTrackableID();
+                String meetTime = addMeetTIme.getText().toString();
+
+                TrackingList.getInstance().addTracking(title, currentTrackableID, stationaryStartTime ,meetTime, stationaryEndTime, meetLocation);
+                Intent goBack = new Intent(this, TrackingListActivity.class);
+                goBack.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(goBack);
+                finish();
+                return true;
+            case R.id.action_cancel:
+                StationaryPeriodListActivity.getmStationaryEndTime().clear();
+                StationaryPeriodListActivity.getmStationaryStart().clear();
+                StationaryPeriodListActivity.getmStationaryLat().clear();
+                StationaryPeriodListActivity.getmStationaryLong().clear();
+                Intent cancel = new Intent(this, TrackingListActivity.class);
+                cancel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(cancel);
+                finish();
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     //Handle incoming intent
@@ -144,29 +210,42 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
             stationaryLat = Double.toString(getIntent().getDoubleExtra("stationary_lat", 0));
             meetLocation = stationaryLat + ",  " + stationaryLong;
             //Save the clicked position so that we know which stationary time user picked
-            clickedPosition = getIntent().getIntExtra("clicked_position", 0);
+            pickedEvent = getIntent().getIntExtra("clicked_position", 0);
             //Display start time, end time f
-            setEditTrackingDetail(stationaryStartTime, stationaryEndTime, meetLocation);
+            setEditTrackingDetail();
 
+        }else if (isEdit && getIntent().hasExtra("title") && getIntent().hasExtra("start_time") && getIntent().hasExtra("meet_time") && getIntent().hasExtra("end_time")
+                && getIntent().hasExtra("meet_location")){
+            title = getIntent().getStringExtra("title");
+            stationaryStartTime = getIntent().getStringExtra("start_time");
+            currentMeetTime = getIntent().getStringExtra("meet_time");
+            stationaryEndTime = getIntent().getStringExtra("end_time");
+            meetLocation = getIntent().getStringExtra("meet_location");
+            pickedEvent = getIntent().getIntExtra("picked_event", 0);
+            setEditTrackingDetail();
         }
 
 
     }
 
-    private void setEditTrackingDetail(String stationaryStartTime, String stationaryEndTime, String meetLocation){
+    private void setEditTrackingDetail(){
         Log.d(TAG, "setTrackingDetail: add event");
-            TextView startTime = (TextView) findViewById(R.id.addStartTime);
-            startTime.setText(stationaryStartTime);
-            TextView endTime = (TextView) findViewById(R.id.addEndTime);
-            endTime.setText(stationaryEndTime);
-            //TextView currentLocation = (TextView) findViewById(R.id.trackingCurrentLocation);
-            //currentLocation.setText(trackingCurrentLocation);
-            TextView meetLocationView = (TextView) findViewById(R.id.addMeetLocation);
-            meetLocationView.setText(meetLocation);
+        EditText titleView = (EditText) findViewById(R.id.addTitle);
+        titleView.setText(title);
+        TextView startTime = (TextView) findViewById(R.id.addStartTime);
+        startTime.setText(stationaryStartTime);
+        TextView meetTimeView = (TextView) findViewById(R.id.addMeetTIme);
+        meetTimeView.setText(currentMeetTime);
+        TextView endTime = (TextView) findViewById(R.id.addEndTime);
+        endTime.setText(stationaryEndTime);
+        //TextView currentLocation = (TextView) findViewById(R.id.trackingCurrentLocation);
+        //currentLocation.setText(trackingCurrentLocation);
+        TextView meetLocationView = (TextView) findViewById(R.id.addMeetLocation);
+        meetLocationView.setText(meetLocation);
 
     }
 
-    public static int getClickedPosition() {
-        return clickedPosition;
+    public static int getPickedEvent() {
+        return pickedEvent;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.nex_.mobiledev_assignment1.model.tracking;
 
 public class Tracking extends AbstrackTracking {
-    private int trackingID;
+    private String trackingID;
     private int trackableID;
     private String title;
     private String startTime;
@@ -9,7 +9,7 @@ public class Tracking extends AbstrackTracking {
     private String meetTime;
     private String meetLocation;
 
-    Tracking(int trackingID, String title, int trackableID, String startTime, String endTime, String meetTime, String meetLocation) {
+    public Tracking(String trackingID, String title, int trackableID, String startTime, String endTime, String meetTime, String meetLocation) {
         this.trackingID = trackingID;
         this.title = title;
         this.trackableID = trackableID;
@@ -19,7 +19,7 @@ public class Tracking extends AbstrackTracking {
         this.meetLocation = meetLocation;
     }
 
-    public int getTrackingID() {
+    public String getTrackingID() {
         return trackingID;
     }
 

@@ -9,6 +9,7 @@ public class TrackableList {
         return ourInstance;
     }
 
+    //This class holds an array of Trackable objects
     private ArrayList<Trackable> trackablesList;
     private ArrayList<String> trackableNames;
     private ArrayList<String> trackableCategory;
