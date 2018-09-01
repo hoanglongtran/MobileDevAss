@@ -49,7 +49,7 @@ public class TrackableListRecycleViewAdapter extends RecyclerView.Adapter<Tracka
             @Override
             public void onClick(View v) {
                 Intent trackableDetail = new Intent(v.getContext(), TrackableDetailActivity.class);
-                trackableDetail.putExtra("trackable_id", TrackableList.getInstance().getTrackablesList().get(3).getTrackabelID());
+                trackableDetail.putExtra("trackable_id", TrackableList.getInstance().getTrackablesList().get(position).getTrackabelID());
                 trackableDetail.putExtra("trackable_name", TrackableList.getInstance().getTrackablesList().get(position).getName());
                 trackableDetail.putExtra("trackable_des", TrackableList.getInstance().getTrackablesList().get(position).getTackableDes());
                 trackableDetail.putExtra("trackable_url", TrackableList.getInstance().getTrackablesList().get(position).getURL());

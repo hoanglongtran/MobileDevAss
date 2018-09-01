@@ -51,6 +51,7 @@ public class TrackingListRecycleViewAdapter extends RecyclerView.Adapter<Trackin
                 trackingDetail.putExtra("tracking_start_time", TrackingList.getInstance().getTrackingList().get(position).getStartTime());
                 trackingDetail.putExtra("tracking_meet_time", TrackingList.getInstance().getTrackingList().get(position).getMeetTime());
                 trackingDetail.putExtra("tracking_end_time", TrackingList.getInstance().getTrackingList().get(position).getEndTime());
+                trackingDetail.putExtra("tracking_meet_location", TrackingList.getInstance().getTrackingList().get(position).getMeetLocation());
                 v.getContext().startActivity(trackingDetail);
             }
         });

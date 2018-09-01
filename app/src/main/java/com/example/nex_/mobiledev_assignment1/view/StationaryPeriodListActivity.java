@@ -17,10 +17,10 @@ import java.util.ArrayList;
 public class StationaryPeriodListActivity extends ParentActivity {
     private static final String TAG = "StationaryPeriodListActivity";
 
-    private ArrayList<String> mStationaryStart = new ArrayList<>();
-    private ArrayList<String> mStationaryEndTime = new ArrayList<>();
-    private ArrayList<Double> mStationaryLong = new ArrayList<>();
-    private ArrayList<Double> mStationaryLat = new ArrayList<>();
+    private static ArrayList<String> mStationaryStart = new ArrayList<>();
+    private static ArrayList<String> mStationaryEndTime = new ArrayList<>();
+    private static ArrayList<Double> mStationaryLong = new ArrayList<>();
+    private static ArrayList<Double> mStationaryLat = new ArrayList<>();
     private static int currentTrackableID;
 
 
@@ -78,5 +78,25 @@ public class StationaryPeriodListActivity extends ParentActivity {
         StationaryPeriodListRecycleViewAdapter adapter = new StationaryPeriodListRecycleViewAdapter(mStationaryStart, mStationaryEndTime, mStationaryLong, mStationaryLat,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public static ArrayList<String> getmStationaryStart() {
+        return mStationaryStart;
+    }
+
+    public static ArrayList<String> getmStationaryEndTime() {
+        return mStationaryEndTime;
+    }
+
+    public static ArrayList<Double> getmStationaryLong() {
+        return mStationaryLong;
+    }
+
+    public static ArrayList<Double> getmStationaryLat() {
+        return mStationaryLat;
+    }
+
+    public static void setCurrentTrackableID(int currentTrackableID) {
+        StationaryPeriodListActivity.currentTrackableID = currentTrackableID;
     }
 }

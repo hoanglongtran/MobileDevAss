@@ -12,8 +12,15 @@ import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
 
+import org.w3c.dom.Text;
+
 public class TrackingDetailActivity extends ParentActivity {
     private static final String TAG = "TrackingDetailActivity";
+    private String trackingTitle;
+    private String trackingStartTime;
+    private String trackingEndTime;
+    private String trackingMeetTime;
+    private String trackingMeetLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +50,17 @@ public class TrackingDetailActivity extends ParentActivity {
                 && getIntent().hasExtra("tracking_end_time") && getIntent().hasExtra("tracking_meet_time")){
             Log.d(TAG, "getIncomingIntent: found intent extra");
             //check if have extra first before calling to prevent crashing when calling getStringExtra
-            String trackingTitle = getIntent().getStringExtra("tracking_title");
-            String trackingStartTime = getIntent().getStringExtra("tracking_start_time");
-            String TrackingEndTime = getIntent().getStringExtra("tracking_end_time");
-            String trackingMeetTime = getIntent().getStringExtra("tracking_meet_time");
-
-            setTrackingDetail(trackingTitle,trackingStartTime,trackingMeetTime,TrackingEndTime);
+             trackingTitle = getIntent().getStringExtra("tracking_title");
+             trackingStartTime = getIntent().getStringExtra("tracking_start_time");
+             trackingEndTime = getIntent().getStringExtra("tracking_end_time");
+             trackingMeetTime = getIntent().getStringExtra("tracking_meet_time");
+             trackingMeetLocation = getIntent().getStringExtra("tracking_meet_location");
+            setTrackingDetail(trackingTitle,trackingStartTime,trackingMeetTime,trackingEndTime,trackingMeetLocation);
         }
 
     }
 
-    private void setTrackingDetail(String trackingTitle, String trackingStartTime, String TrackingMeetTime, String trackingEndTime){
+    private void setTrackingDetail(String trackingTitle, String trackingStartTime, String TrackingMeetTime, String trackingEndTime, String trackingMeetLocation){
         Log.d(TAG, "setTrackingDetail: setting to tracking details");
         TextView title = (TextView) findViewById(R.id.trackingTitle);
         title.setText(trackingTitle);
@@ -63,7 +70,28 @@ public class TrackingDetailActivity extends ParentActivity {
         meetTime.setText(TrackingMeetTime);
         TextView endTime = (TextView) findViewById(R.id.trackingEndTime);
         endTime.setText(trackingEndTime);
+        TextView currentLocation = (TextView) findViewById(R.id.trackingCurrentLocation);
+        TextView meetLocation = (TextView) findViewById(R.id.trackingMeetLocation);
+        meetLocation.setText(trackingMeetLocation);
     }
 
+    public String getTrackingTitle() {
+        return trackingTitle;
+    }
 
+    public String getTrackingStartTime() {
+        return trackingStartTime;
+    }
+
+    public String getTrackingEndTime() {
+        return trackingEndTime;
+    }
+
+    public String getTrackingMeetTime() {
+        return trackingMeetTime;
+    }
+
+    public String getTrackingMeetLocation() {
+        return trackingMeetLocation;
+    }
 }
