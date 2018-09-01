@@ -3,14 +3,17 @@ package com.example.nex_.mobiledev_assignment1.controller;
 
 
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.example.nex_.mobiledev_assignment1.R;
-import com.example.nex_.mobiledev_assignment1.view.AddTrackingActivity;
-import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableListActivity;
-import com.example.nex_.mobiledev_assignment1.view.tracking.TrackingListActivity;
+import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
+import com.example.nex_.mobiledev_assignment1.view.StationaryPeriodListActivity;
+import com.example.nex_.mobiledev_assignment1.view.TrackableDetailActivity;
+import com.example.nex_.mobiledev_assignment1.view.TrackableListActivity;
+import com.example.nex_.mobiledev_assignment1.view.TrackingListActivity;
 
-public class Listeners implements View.OnClickListener  {
+public class Listeners extends FragmentActivity implements View.OnClickListener  {
     private static final Listeners ourInstance = new Listeners();
 
     public static Listeners getInstance() {
@@ -36,16 +39,17 @@ public class Listeners implements View.OnClickListener  {
                 break;
 
             case R.id.add_event_fab:
-                Intent addTracking = new Intent(v.getContext(), AddTrackingActivity.class);
-                //addTracking.putExtra("tracking_start_time", TrackingList.getInstance().getTrackingList().get(TrackingInfoProcessing.getCurrentTrackableID().get());
-                //addTracking.putExtra("tracking_end_time", TrackingList.getInstance().getTrackingList().get(TrackingInfoProcessing.getCurrentTrackableID().getTackableDes());
-                ///addTracking.putExtra("tracking_current_location", TrackingList.getInstance().getTrackingList().get(TrackingInfoProcessing.getCurrentTrackableID().getURL());
-                //addTracking.putExtra("tracking_meet_location", TrackingList.getInstance().getTrackingList().get(TrackingInfoProcessing.getCurrentTrackableID().getCategory());
+                Intent addTracking = new Intent(v.getContext(), StationaryPeriodListActivity.class);
+                Controller.getInstance().setCurrentTrackable(TrackableDetailActivity.getCurrentTrackableID());
+                TrackingInfoProcessing.getMeetLocation();
                v.getContext().startActivity(addTracking);
                 break;
                 //TODO:
                 //get tracking info from selected trackable;
-
+            /*case R.id.timePicker:
+                android.support.v4.app.DialogFragment timePicker = new TimePickerFragment();
+               timePicker.show(getSupportFragmentManager(), "time picker");
+               break;*/
             default:
                 break;
         }

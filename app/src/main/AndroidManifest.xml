@@ -40,19 +40,19 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".view.trackable.TrackableListActivity"
+            android:name=".view.TrackableListActivity"
             android:label="@string/trackable_list" />
         <activity
-            android:name=".view.tracking.TrackingDetailActivity"
+            android:name=".view.TrackingDetailActivity"
             android:label="@string/tracking_detail" />
         <activity
             android:name=".view.AddTrackingActivity"
             android:label="@string/add_tracking" />
         <activity
-            android:name=".view.trackable.TrackableDetailActivity"
+            android:name=".view.TrackableDetailActivity"
             android:label="@string/trackable_detail" />
         <activity
-            android:name=".view.tracking.TrackingListActivity"
+            android:name=".view.TrackingListActivity"
             android:label="@string/tracking_list" />
         <activity android:name=".view.StationaryPeriodListActivity"></activity>
     </application>

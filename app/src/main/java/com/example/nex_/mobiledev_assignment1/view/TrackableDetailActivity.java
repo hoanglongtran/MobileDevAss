@@ -1,4 +1,4 @@
-package com.example.nex_.mobiledev_assignment1.view.trackable;
+package com.example.nex_.mobiledev_assignment1.view;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +45,8 @@ public class TrackableDetailActivity extends ParentActivity {
 
         if (whoCalling != null && whoCalling.equals("ParentActivity")){
             addEventFab.setVisibility(View.VISIBLE);
-            Controller.getInstance().setCurrentTrackable(currentTrackableID);
+
+
         }else {
 
         }
@@ -85,6 +86,10 @@ public class TrackableDetailActivity extends ParentActivity {
             System.out.println("Test " + getIntent().getIntExtra("trackable_id",0));
         }
 
+    }
+
+    public static int getCurrentTrackableID() {
+        return currentTrackableID;
     }
 
     private void setTrackableDetail(String trackableName, String trackableDes, String trackableURL, String trackableCategory){

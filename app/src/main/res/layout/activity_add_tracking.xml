@@ -52,7 +52,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/editText4"
+                android:id="@+id/addStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="13dp"
@@ -74,15 +74,23 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <TextView
                 android:id="@+id/addMeetTIme"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="56dp"
                 android:layout_marginEnd="13dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:hint="Add Meet Title"
-                android:singleLine="false" />
+                android:textSize="18sp"
+                android:hint="Add Meet Time"
+                 />
+
+            <Button
+                android:id="@+id/timePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Pick a meet time" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -97,7 +105,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/editText5"
+                android:id="@+id/addEndTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="13dp"
@@ -120,7 +128,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/editText6"
+                android:id="@+id/addCurrentLocation"
                 android:layout_width="354dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="300dp"
@@ -143,7 +151,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/editText8"
+                android:id="@+id/addMeetLocation"
                 android:layout_width="354dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="300dp"
@@ -152,8 +160,6 @@
                 android:ems="10"
                 android:hint="Meet Location"
                 android:textSize="18sp" />
-
-
 
 
         </LinearLayout>

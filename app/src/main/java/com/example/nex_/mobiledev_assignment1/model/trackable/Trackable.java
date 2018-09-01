@@ -16,9 +16,11 @@ public class Trackable {
     private String category;
     private double currentLong;
     private double currentLat;
-    private ArrayList<Double> meetLong;
-    private ArrayList<Double> meetLat;
-    private String meetTime;
+    private ArrayList<Double> stationaryLong = new ArrayList<>();
+    private ArrayList<Double> stationaryLat = new ArrayList<>();
+    private ArrayList<String> stationaryStartTime = new ArrayList<>();
+    private ArrayList<String> stationaryEndTime = new ArrayList<>();
+    private int chosenStationary;
 
 
     Trackable(int trackabelID, String name, String trackableDes, String URL, String category) {
@@ -65,27 +67,29 @@ public class Trackable {
         this.currentLat = currentLat;
     }
 
-    public ArrayList<Double> getMeetLong() {
-        return meetLong;
+    public ArrayList<Double> getStationaryLong() {
+        return stationaryLong;
     }
 
-    public void setMeetLong(ArrayList<Double> meetLong) {
-        this.meetLong = meetLong;
+
+    public ArrayList<Double> getStationaryLat() {
+        return stationaryLat;
     }
 
-    public ArrayList<Double> getMeetLat() {
-        return meetLat;
+
+    public ArrayList<String> getStationaryStartTime() {
+        return stationaryStartTime;
     }
 
-    public void setMeetLat(ArrayList<Double> meetLat) {
-        this.meetLat = meetLat;
+    public ArrayList<String> getStationaryEndTime() {
+        return stationaryEndTime;
     }
 
-    public String getMeetTime() {
-        return meetTime;
+    public int getChosenStationary() {
+        return chosenStationary;
     }
 
-    public void setMeetTime(String meetTime) {
-        this.meetTime = meetTime;
+    public void setChosenStationary(int chosenStationary) {
+        this.chosenStationary = chosenStationary;
     }
 }

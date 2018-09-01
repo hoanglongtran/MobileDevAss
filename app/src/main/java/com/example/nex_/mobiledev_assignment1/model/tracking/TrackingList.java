@@ -23,8 +23,8 @@ public class TrackingList {
         trackingMeetTime = new ArrayList<>();
 
     }
-    public void addTracking(int ID, String title, int trackableID, String startTime, String meetTime,  String endTime){
-        Tracking tracking = new Tracking(ID, title, trackableID, startTime, endTime, meetTime);
+    public void addTracking(String title, int trackableID, String startTime, String meetTime,  String endTime, String meetLocation){
+        Tracking tracking = new Tracking(ID, title, trackableID, startTime, endTime, meetTime, meetLocation);
         trackingList.add(tracking);
         trackingTitle.add(title);
         trackingMeetTime.add(meetTime);

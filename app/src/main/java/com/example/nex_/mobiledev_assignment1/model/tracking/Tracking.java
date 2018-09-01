@@ -7,14 +7,16 @@ public class Tracking extends AbstrackTracking {
     private String startTime;
     private String endTime;
     private String meetTime;
+    private String meetLocation;
 
-    Tracking(int trackingID, String title, int trackableID, String startTime, String endTime, String meetTime) {
+    Tracking(int trackingID, String title, int trackableID, String startTime, String endTime, String meetTime, String meetLocation) {
         this.trackingID = trackingID;
         this.title = title;
         this.trackableID = trackableID;
         this.startTime = startTime;
         this.endTime = endTime;
         this.meetTime = meetTime;
+        this.meetLocation = meetLocation;
     }
 
     public int getTrackingID() {
@@ -39,6 +41,10 @@ public class Tracking extends AbstrackTracking {
 
     public int getTrackableID() {
         return trackableID;
+    }
+
+    public String getMeetLocation() {
+        return meetLocation;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.nex_.mobiledev_assignment1.view.tracking;
+package com.example.nex_.mobiledev_assignment1.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
+import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
 
 public class TrackingDetailActivity extends ParentActivity {
@@ -46,8 +47,10 @@ public class TrackingDetailActivity extends ParentActivity {
             String trackingStartTime = getIntent().getStringExtra("tracking_start_time");
             String TrackingEndTime = getIntent().getStringExtra("tracking_end_time");
             String trackingMeetTime = getIntent().getStringExtra("tracking_meet_time");
+
             setTrackingDetail(trackingTitle,trackingStartTime,trackingMeetTime,TrackingEndTime);
         }
+
     }
 
     private void setTrackingDetail(String trackingTitle, String trackingStartTime, String TrackingMeetTime, String trackingEndTime){

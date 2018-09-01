@@ -3,12 +3,18 @@ package com.example.nex_.mobiledev_assignment1.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
-import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableListActivity;
+import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
 
 public abstract class ParentActivity extends AppCompatActivity {
     //This abstract class handles all action from every other class on the app bar
+    protected String meetLocation;
+    protected String stationaryStartTime;
+    protected String stationaryEndTime;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -26,6 +32,14 @@ public abstract class ParentActivity extends AppCompatActivity {
             case R.id.action_edit:
                 return true;
             case R.id.action_save:
+                //Save input item and create a tracking even object
+                EditText addTitle = (EditText) findViewById(R.id.addTitle);
+                TextView addMeetTIme = (TextView) findViewById(R.id.addMeetTIme);
+                String title = addTitle.getText().toString();
+                int currentTrackableID = TrackableDetailActivity.getCurrentTrackableID();
+                String meetTime = addMeetTIme.getText().toString();
+
+                TrackingList.getInstance().addTracking(title, TrackableDetailActivity.getCurrentTrackableID(), stationaryStartTime ,meetTime, stationaryEndTime, meetLocation);
                 return true;
             case R.id.action_cancel:
                 return true;

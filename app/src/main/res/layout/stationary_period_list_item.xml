@@ -2,29 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="120dp"
     android:padding="15dp"
-    android:id="@+id/trackingListItemParentLayout">
+    android:id="@+id/stationaryPeriodListItemParentLayout">
 
     <TextView
-        android:id="@+id/meetTime"
+        android:id="@+id/stationaryStartTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="-27dp"
-        android:layout_marginStart="45dp"
-        android:text="Meet Time"
+        android:layout_marginStart="10dp"
+        android:text="Start Time"
         android:textColor="#000"
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/meetDuration"
+        android:id="@+id/stationaryEndTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginStart="69dp"
+        android:layout_below="@+id/stationaryLongitude"
+        android:layout_marginStart="50dp"
         android:gravity="center"
-        android:text="Duration"
+        android:text="End Time"
         android:textColor="#000" />
 
     <View
@@ -36,33 +36,33 @@
         android:background="?android:attr/listDivider" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/stationaryLongitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="113dp"
         android:layout_marginTop="27dp"
-        android:text="Longtitude" />
+        android:text="TextView" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView"
-        android:layout_alignTop="@+id/meetDuration"
-        android:text="TextView" />
+        android:layout_alignStart="@+id/stationaryLongitude"
+        android:layout_alignTop="@+id/stationaryStartTime"
+        android:text="Longitude" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/meetLatitude"
+        android:layout_alignStart="@+id/stationaryLatitude"
         android:layout_marginTop="20dp"
         android:text="Latitude" />
 
     <TextView
-        android:id="@+id/meetLatitude"
+        android:id="@+id/stationaryLatitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
