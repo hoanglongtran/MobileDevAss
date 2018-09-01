@@ -9,9 +9,9 @@ import android.view.View;
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.view.StationaryPeriodListActivity;
-import com.example.nex_.mobiledev_assignment1.view.TrackableDetailActivity;
-import com.example.nex_.mobiledev_assignment1.view.TrackableListActivity;
-import com.example.nex_.mobiledev_assignment1.view.TrackingListActivity;
+import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableDetailActivity;
+import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableListActivity;
+import com.example.nex_.mobiledev_assignment1.view.tracking.TrackingListActivity;
 
 public class Listeners extends FragmentActivity implements View.OnClickListener  {
     private static final Listeners ourInstance = new Listeners();

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
+import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableDetailActivity;
 
 import java.util.ArrayList;
 
@@ -57,6 +58,7 @@ public class StationaryPeriodListRecycleViewAdapter extends RecyclerView.Adapter
                 addActivity.putExtra("stationary_end", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryEndTime().get(position));
                 addActivity.putExtra("stationary_long", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLong().get(position));
                 addActivity.putExtra("stationary_lat", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLat().get(position));
+                addActivity.putExtra("clicked_position", position);
                 //addActivity.putExtra("whoCalled", whoCalling);
                 System.out.println("Click postion:" + position);
                 v.getContext().startActivity(addActivity);

@@ -24,7 +24,7 @@ public class TrackingList {
 
     }
     public void addTracking(String title, int trackableID, String startTime, String meetTime,  String endTime, String meetLocation){
-        Tracking tracking = new Tracking(ID, title, trackableID, startTime, endTime, meetTime, meetLocation);
+        Tracking tracking = new Tracking(0, title, trackableID, startTime, endTime, meetTime, meetLocation);
         trackingList.add(tracking);
         trackingTitle.add(title);
         trackingMeetTime.add(meetTime);

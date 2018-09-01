@@ -1,4 +1,4 @@
-package com.example.nex_.mobiledev_assignment1.view;
+package com.example.nex_.mobiledev_assignment1.view.tracking;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

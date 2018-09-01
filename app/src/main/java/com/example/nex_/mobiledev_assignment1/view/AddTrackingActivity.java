@@ -20,6 +20,7 @@ import java.util.Calendar;
 
 public class AddTrackingActivity extends ParentActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "AddTrackingActivity";
+    private static int clickedPosition = 0;
 
 
     @Override
@@ -84,12 +85,14 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
                 && getIntent().hasExtra("stationary_long") && getIntent().hasExtra("stationary_lat") && getIntent().hasExtra("clicked_position")){
             Log.d(TAG, "getIncomingIntent: found intent extra");
             //check if have extra first before calling to prevent crashing when calling getStringExtra
-            stationaryStartTime = getIntent().getStringExtra("stationary_start");
-            stationaryEndTime = getIntent().getStringExtra("stationary_end");
+            String stationaryStartTime = getIntent().getStringExtra("stationary_start");
+            String stationaryEndTime = getIntent().getStringExtra("stationary_end");
             String stationaryLong = Double.toString(getIntent().getDoubleExtra("stationary_long", 0));
             String stationaryLat = Double.toString(getIntent().getDoubleExtra("stationary_lat", 0));
-            meetLocation = stationaryLat+ ",  " + stationaryLong;
-            //Display start time, end time from which stationary time user picked
+            String meetLocation = stationaryLat+ ",  " + stationaryLong;
+            //Save the clicked position so that we know which stationary time user picked
+            clickedPosition = getIntent().getIntExtra("clicked_position", 0);
+            //Display start time, end time f
             setEditTrackingDetail(stationaryStartTime, stationaryEndTime, meetLocation);
 
         }
@@ -108,15 +111,7 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
         meetLocationView.setText(meetLocation);
     }
 
-    public String getMeetLocation() {
-        return meetLocation;
-    }
-
-    public String getStationaryStartTime() {
-        return stationaryStartTime;
-    }
-
-    public String getStationaryEndTime() {
-        return stationaryEndTime;
+    public static int getClickedPosition() {
+        return clickedPosition;
     }
 }
