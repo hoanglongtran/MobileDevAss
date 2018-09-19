@@ -44,7 +44,6 @@ public class StationaryPeriodListRecycleViewAdapter extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
-        System.out.println("Current position: " + position);
         TrackableList.getInstance().getTrackablesList().get(TrackableDetailActivity.getCurrentTrackableID()).setChosenStationary(position);
         holder.stationaryStartTime.setText(mStationaryStartTIme.get(position));
         holder.stationaryEndTime.setText(mStationaryEndTime.get(position));
@@ -59,8 +58,7 @@ public class StationaryPeriodListRecycleViewAdapter extends RecyclerView.Adapter
                 addActivity.putExtra("stationary_long", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLong().get(position));
                 addActivity.putExtra("stationary_lat", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLat().get(position));
                 addActivity.putExtra("clicked_position", position);
-                //addActivity.putExtra("whoCalled", whoCalling);
-                System.out.println("Click postion:" + position);
+                Log.d(TAG, "onClick: Clicked position: " + position);
                 v.getContext().startActivity(addActivity);
             }
         });

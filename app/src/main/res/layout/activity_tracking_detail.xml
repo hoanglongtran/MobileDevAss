@@ -24,7 +24,7 @@
                 android:layout_marginEnd="333dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="17dp"
-                android:text="Title"
+                android:text="@string/title"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -36,7 +36,7 @@
                 android:layout_marginEnd="13dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:hint="Title"
+                android:hint="@string/title"
                 android:singleLine="false" />
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_marginEnd="285dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:text="Start Time"
+                android:text="@string/start_time"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -59,8 +59,7 @@
                 android:layout_marginStart="16dp"
                 android:textSize="18sp"
                 android:layout_marginTop="7dp"
-                android:hint="Start Time"
-                android:inputType="time" />
+                android:hint="@string/start_time" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -69,7 +68,7 @@
                 android:layout_marginEnd="283dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:text="Meet Time"
+                android:text="@string/meet_time"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -81,7 +80,7 @@
                 android:layout_marginEnd="13dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:hint="Add Meet Title"
+                android:hint="@string/meet_time"
                 android:singleLine="false" />
 
             <TextView
@@ -91,7 +90,7 @@
                 android:layout_marginEnd="290dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:text="End Time"
+                android:text="@string/end_time"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -104,8 +103,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
                 android:textSize="18sp"
-                android:hint="End Time"
-                android:inputType="time" />
+                android:hint="@string/end_time"/>
 
             <TextView
                 android:id="@+id/textView8"
@@ -114,7 +112,7 @@
                 android:layout_marginEnd="236dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:text="Current Location"
+                android:text="@string/current_location"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -126,8 +124,7 @@
                 android:layout_marginEnd="300dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:hint="Current Location"
-                android:inputType="textPersonName"
+                android:hint="@string/current_location"
                 android:textSize="18sp" />
 
             <TextView
@@ -137,7 +134,7 @@
                 android:layout_marginEnd="253dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:text="Meet Location"
+                android:text="@string/meet_location"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -150,7 +147,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
                 android:ems="10"
-                android:hint="Meet Location"
+                android:hint="@string/meet_location"
                 android:textSize="18sp" />
 
             <Button
@@ -159,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_gravity="end|bottom"
-                android:text="Track" />
+                android:text="@string/track" />
 
 
         </LinearLayout>

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,35 +16,36 @@ import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class TrackableListRecycleViewAdapter extends RecyclerView.Adapter<TrackableListRecycleViewAdapter.ViewHolder>{
+public class TrackableListRecycleViewAdapter extends RecyclerView.Adapter<TrackableListRecycleViewAdapter.ViewHolder> implements Filterable{
     private static final String TAG = "TrackableListRecycleViewAdapter";
 
     private ArrayList<String> mTrackableName;
     private ArrayList<String> mTrackableCategory;
+    private ArrayList<String> mTrackableCategoryFull;
     private String whoCalling;
     private Context mContext;
 
-    public TrackableListRecycleViewAdapter(String whoCalling, ArrayList<String> mTrackableName, ArrayList<String> mTrackableCategory, Context mContext) {
+    TrackableListRecycleViewAdapter(String whoCalling, ArrayList<String> mTrackableName, ArrayList<String> mTrackableCategory, Context mContext) {
         this.whoCalling = whoCalling;
         this.mTrackableName = mTrackableName;
         this.mTrackableCategory = mTrackableCategory;
         this.mContext = mContext;
+        mTrackableCategoryFull = new ArrayList<>(mTrackableCategory);//Copy the list to use independently
     }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trackable_list_item, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
-        System.out.println("Trackable names from recycler view");
-        System.out.println(mTrackableName.get(position));
-        System.out.println("Current position: " + position);
         holder.trackableName.setText(mTrackableName.get(position));
         holder.trackableCategory.setText(mTrackableCategory.get(position));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -54,9 +57,8 @@ public class TrackableListRecycleViewAdapter extends RecyclerView.Adapter<Tracka
                 trackableDetail.putExtra("trackable_des", TrackableList.getInstance().getTrackablesList().get(position).getTackableDes());
                 trackableDetail.putExtra("trackable_url", TrackableList.getInstance().getTrackablesList().get(position).getURL());
                 trackableDetail.putExtra("trackable_category", TrackableList.getInstance().getTrackablesList().get(position).getCategory());
-                trackableDetail.putExtra("trackable_id", TrackableList.getInstance().getTrackablesList().get(position).getTrackabelID());
                 trackableDetail.putExtra("whoCalled", whoCalling);
-                System.out.println("Click postion:" + position);
+                Log.d(TAG, "onClick: Clicked position:"+position);
                 v.getContext().startActivity(trackableDetail);
             }
         });
@@ -65,15 +67,15 @@ public class TrackableListRecycleViewAdapter extends RecyclerView.Adapter<Tracka
 
     @Override
     public int getItemCount() {
-        return mTrackableName.size();
+        return mTrackableCategory.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
         //Hold the widget in memory individually
         TextView trackableName;
         TextView trackableCategory;
         RelativeLayout parentLayout;
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             trackableName = itemView.findViewById(R.id.trackable_name);
             trackableCategory = itemView.findViewById(R.id.trackable_category);
@@ -81,7 +83,38 @@ public class TrackableListRecycleViewAdapter extends RecyclerView.Adapter<Tracka
         }
     }
 
-    public void setWhoCalling(String whoCalling) {
-        this.whoCalling = whoCalling;
+    @Override
+    public Filter getFilter() {
+        return mTrackableCategoryFilter;
     }
+
+    private Filter mTrackableCategoryFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<String> filteredList = new ArrayList<>();
+            if (constraint == null|| constraint.length() == 0){
+                filteredList.addAll(mTrackableCategoryFull);
+            }else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (String item : mTrackableCategoryFull){
+                    if (item.toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mTrackableCategory.clear();
+            mTrackableCategory.addAll((List) results.values);
+
+            notifyDataSetChanged();
+        }
+    };
+
 }

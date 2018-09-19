@@ -1,12 +1,15 @@
 package com.example.nex_.mobiledev_assignment1.view.trackable;
 
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 
 
 import com.example.nex_.mobiledev_assignment1.R;
@@ -21,7 +24,7 @@ public class TrackableListActivity extends ParentActivity {
 
     private ArrayList<String> mTrackableName = new ArrayList<>();
     private ArrayList<String> mTrackableCategory = new ArrayList<>();
-
+    private TrackableListRecycleViewAdapter adapter;
     private String caller = "";
     private static Boolean key = true;
 
@@ -41,7 +44,7 @@ public class TrackableListActivity extends ParentActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         caller = getIntent().getStringExtra("caller");
-        System.out.println("This is the one who called: " + caller);
+        Log.d(TAG, "onCreate: This is the one who called" + caller);
 
         if (caller != null && caller.equals("ParentActivity")){
             setTitle("Pick a trackable");
@@ -49,27 +52,6 @@ public class TrackableListActivity extends ParentActivity {
         setSupportActionBar(myToolbar);
         initName();
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_buttons, menu);
-        menu.findItem(R.id.action_save).setVisible(false);
-        menu.findItem(R.id.action_edit).setVisible(false);
-        menu.findItem(R.id.action_add_event).setVisible(false);
-        menu.findItem(R.id.action_cancel).setVisible(false);
-        menu.findItem(R.id.action_search).setVisible(true);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private void initName(){
@@ -82,9 +64,56 @@ public class TrackableListActivity extends ParentActivity {
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: ");
         //need to be called through controller packagae
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.trackable_recycle_view);
-        TrackableListRecycleViewAdapter adapter = new TrackableListRecycleViewAdapter(caller, mTrackableName, mTrackableCategory,this);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.trackableRecycleView);
+        adapter = new TrackableListRecycleViewAdapter(caller, mTrackableName, mTrackableCategory,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_buttons, menu);
+        menu.findItem(R.id.action_save).setVisible(false);
+        menu.findItem(R.id.action_edit).setVisible(false);
+        menu.findItem(R.id.action_add_event).setVisible(false);
+        menu.findItem(R.id.action_cancel).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(true);
+
+
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
+
 }

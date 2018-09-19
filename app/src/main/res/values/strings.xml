@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Mobile Dev - Assignment 1</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Tracker</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -9,7 +9,7 @@
     <string name="action_settings">Settings</string>
     <string name="add_tracking">Add a tracking event</string>
     <string name="trackable_detail">Whatever detail</string>
-    <string name="trackable_list">Whatever list</string>
+    <string name="trackable_list">Trackable list</string>
     <string name="tracking_detail">Event detail</string>
     <string name="action_add_event">Add event</string>
     <string name="action_save">Save</string>
@@ -21,6 +21,25 @@
     <string name="stationary_time_pick">Pick a stationary time</string>
     <string name="edit_event">Edit event</string>
     <string name="search">Search</string>
+    <string name="pick_meet_time">Pick a meet time</string>
+    <string name="title">Title</string>
+    <string name="hint_add_title">Add title</string>
+    <string name="start_time">Start time</string>
+    <string name="meet_time">Meet time</string>
+    <string name="end_time">End time</string>
+    <string name="current_location">Current location</string>
+    <string name="meet_location">Meet location</string>
+    <string name="hint_add_meet_time">Add meet time</string>
+    <string name="delete">Delete</string>
+    <string name="description">Description</string>
+    <string name="url">Website URL</string>
+    <string name="category">Category</string>
+    <string name="track">Track</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="trackable">Trackable</string>
+
+
 
     <!-- Strings related to Settings -->
 

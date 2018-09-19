@@ -22,7 +22,7 @@ public class TrackingListRecycleViewAdapter extends RecyclerView.Adapter<Trackin
     private ArrayList<String> mTrackingMeetTime;
     private Context mContext;
 
-    public TrackingListRecycleViewAdapter(ArrayList<String> mTrackingTitle, ArrayList<String> mTrackingMeetTime, Context mContext) {
+    TrackingListRecycleViewAdapter(ArrayList<String> mTrackingTitle, ArrayList<String> mTrackingMeetTime, Context mContext) {
 
         this.mTrackingTitle = mTrackingTitle;
         this.mTrackingMeetTime = mTrackingMeetTime;
@@ -32,15 +32,12 @@ public class TrackingListRecycleViewAdapter extends RecyclerView.Adapter<Trackin
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tracking_list_item, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
-        System.out.println("Tracking title from recycler view");
-        System.out.println(mTrackingTitle.get(position));
         holder.trackingTitle.setText(mTrackingTitle.get(position));
         holder.trackingMeetTime.setText(mTrackingMeetTime.get(position));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +49,7 @@ public class TrackingListRecycleViewAdapter extends RecyclerView.Adapter<Trackin
                 trackingDetail.putExtra("tracking_meet_time", TrackingList.getInstance().getTrackingList().get(position).getMeetTime());
                 trackingDetail.putExtra("tracking_end_time", TrackingList.getInstance().getTrackingList().get(position).getEndTime());
                 trackingDetail.putExtra("tracking_meet_location", TrackingList.getInstance().getTrackingList().get(position).getMeetLocation());
+                trackingDetail.putExtra("picked_trackable_id", TrackingList.getInstance().getTrackingList().get(position).getTrackableID());
                 trackingDetail.putExtra("picked_event", position);
                 v.getContext().startActivity(trackingDetail);
             }
@@ -64,16 +62,18 @@ public class TrackingListRecycleViewAdapter extends RecyclerView.Adapter<Trackin
         return mTrackingTitle.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
         //Hold the widget in memory individually
         TextView trackingTitle;
         TextView trackingMeetTime;
         RelativeLayout parentLayout;
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             trackingTitle = itemView.findViewById(R.id.trackingTitle);
             trackingMeetTime = itemView.findViewById(R.id.trackingMeetTime);
             parentLayout = itemView.findViewById(R.id.trackingListItemParentLayout);
         }
     }
+
+
 }

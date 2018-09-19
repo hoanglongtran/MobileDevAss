@@ -26,10 +26,11 @@ public class MainActivity extends ParentActivity {
         //Read through the file to get tracking data
         Controller.getInstance().getData(this);
 
+        //Add a floating button to get location
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(Listeners.getInstance());
 
-        //Add a floating button to get location
+
 
         //MapView, used for assignment 2
         mapView = (MapView)findViewById(R.id.map);

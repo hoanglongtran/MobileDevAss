@@ -66,6 +66,7 @@ public class Listeners extends FragmentActivity implements View.OnClickListener 
                 ParentActivity.setTrackedTrackableID(trackedTrackableId);
                 Snackbar.make(v, "Tracked", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
                 break;
             case R.id.fab:
                 Controller.getInstance().setCurrentTrackable(ParentActivity.getTrackedTrackableID());
@@ -73,16 +74,12 @@ public class Listeners extends FragmentActivity implements View.OnClickListener 
                 Snackbar.make(v, currentLocation, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 System.out.println("Current location: " + currentLocation);
-                Intent backToMain = new Intent(v.getContext(), MainActivity.class);
-                backToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                v.getContext().startActivity(backToMain);
-                finish();
+
                 break;
             default:
                 break;
         }
 
-        //Trackable trackable1 = new Trackable(v.getContext());
 
     }
 

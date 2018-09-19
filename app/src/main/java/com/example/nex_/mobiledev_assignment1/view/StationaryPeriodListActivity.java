@@ -59,10 +59,10 @@ public class StationaryPeriodListActivity extends ParentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cancel:
-                StationaryPeriodListActivity.getmStationaryEndTime().clear();
-                StationaryPeriodListActivity.getmStationaryStart().clear();
-                StationaryPeriodListActivity.getmStationaryLat().clear();
-                StationaryPeriodListActivity.getmStationaryLong().clear();
+                mStationaryEndTime.clear();
+                mStationaryStart.clear();
+                mStationaryLat.clear();
+                mStationaryLong.clear();
                 Intent cancel = new Intent(this, TrackingListActivity.class);
                 cancel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(cancel);
@@ -119,7 +119,4 @@ public class StationaryPeriodListActivity extends ParentActivity {
         return mStationaryLat;
     }
 
-    public static void setCurrentTrackableID(int currentTrackableID) {
-        StationaryPeriodListActivity.currentTrackableID = currentTrackableID;
-    }
 }

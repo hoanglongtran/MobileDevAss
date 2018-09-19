@@ -1,6 +1,6 @@
 package com.example.nex_.mobiledev_assignment1.model.tracking;
 
-public class Tracking extends AbstrackTracking {
+public class Tracking  {
     private String trackingID;
     private int trackableID;
     private String title;
@@ -19,9 +19,6 @@ public class Tracking extends AbstrackTracking {
         this.meetLocation = meetLocation;
     }
 
-    public String getTrackingID() {
-        return trackingID;
-    }
 
     public String getTitle() {
         return title;
@@ -47,8 +44,4 @@ public class Tracking extends AbstrackTracking {
         return meetLocation;
     }
 
-    @Override
-    public void setTrackableID(int trackableID) {
-        this.trackableID = trackableID;
-    }
 }

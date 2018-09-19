@@ -29,6 +29,7 @@ public class Controller {
         TrackingInfoProcessing.extractCurrentTrackableData(currentTrackableID);
     }
 
+
     public void getData(Context context){
         TrackingInfoProcessing.getData(context);
     }
@@ -38,6 +39,10 @@ public class Controller {
 
         TrackingList.getInstance().getTrackingList().set(pickedEvent, updatedTracking);
 
+    }
+
+    public void addTracking(String title, int currentTrackableID, String stationaryStartTime , String meetTime, String stationaryEndTime, String meetLocation){
+        TrackingList.getInstance().addTracking(title, currentTrackableID, stationaryStartTime ,meetTime, stationaryEndTime, meetLocation);
     }
 
 }

@@ -22,7 +22,6 @@ public class TrackingListActivity extends ParentActivity {
 
     private static ArrayList<String> mTrackingTitle = new ArrayList<>();
     private static ArrayList<String> mTrackingMeetTime = new ArrayList<>();
-    //private Controller controller = new Controller();
 
 
     public static ArrayList<String> getmTrackingTitle() {
@@ -70,7 +69,6 @@ public class TrackingListActivity extends ParentActivity {
 
     private void initName(){
         Log.d(TAG, "initName: preparing names");
-        //TrackingList.getInstance().addTracking(0, "First Tracking Event", 1, "18:00", "12:00", "13:00");
         mTrackingTitle = TrackingList.getInstance().getTrackingTitle();
         mTrackingMeetTime = TrackingList.getInstance().getTrackingMeetTime();
         initRecyclerView();
@@ -78,7 +76,7 @@ public class TrackingListActivity extends ParentActivity {
 
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: ");
-        RecyclerView trackingRecyclerView = (RecyclerView) findViewById(R.id.tracking_recycle_view);
+        RecyclerView trackingRecyclerView = (RecyclerView) findViewById(R.id.trackingRecycleView);
         TrackingListRecycleViewAdapter adapter = new TrackingListRecycleViewAdapter(mTrackingTitle, mTrackingMeetTime,this);
         trackingRecyclerView.setAdapter(adapter);
         trackingRecyclerView.setLayoutManager(new LinearLayoutManager(this));

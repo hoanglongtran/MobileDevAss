@@ -25,17 +25,13 @@ public class TrackableDetailActivity extends ParentActivity {
         setContentView(R.layout.activity_trackable_detail);
         Log.d(TAG, "onCreate: started");
         getIncomingIntent();
-        System.out.println(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getName());
-        System.out.println(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getTackableDes());
-        System.out.println(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getURL());
-        System.out.println(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getCategory());
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         FloatingActionButton addEventFab = (FloatingActionButton) findViewById(R.id.add_event_fab);
         addEventFab.setOnClickListener(Listeners.getInstance());
         setSupportActionBar(myToolbar);
 
-        System.out.println("Current trackable ID " + currentTrackableID);
+        Log.d(TAG, "onCreate: Current trackable ID " + currentTrackableID);
 
         if (whoCalling != null && whoCalling.equals("ParentActivity")){
             addEventFab.setVisibility(View.VISIBLE);

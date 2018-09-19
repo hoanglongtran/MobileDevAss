@@ -44,7 +44,7 @@ public class TrackingInfoProcessing {
             data = trackingService
                     .getTrackingInfoForTimeRange(date, searchWindow, 0);
             Log.i(LOG_TAG, String.format("Matched Query: %s, +/-%d mins", searchDate, searchWindow));
-            trackingService.log(data);
+            //trackingService.log(data);
             //Convert all tracking info to string
             convertDataToString();
 
@@ -155,7 +155,9 @@ public class TrackingInfoProcessing {
     }
 
     private static String getTime(){
-        return "1:10";
+        //This one is to test the get current location method, which will return the location at 1:15
+        return "1:20";
+        //This one will return the date from the system
         //return new SimpleDateFormat("h:mm").format(new java.util.Date());
     }
 

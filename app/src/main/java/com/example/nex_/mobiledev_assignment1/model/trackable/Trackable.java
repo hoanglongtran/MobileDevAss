@@ -4,24 +4,18 @@ import java.util.ArrayList;
 
 public class Trackable {
 
-    /*General idea: User make a new tracking event, then pick a Trackable, the tracking class will make a new trackable object read the file
-    then return the location to the Trackable object (the trackable should have a setCurrentLocation method) and display the current location
-    as well as the next location that it will stop into the activity. Date and time except meet time will be input from the system.
-    Trackable will also have to read the food_truck_data file and return a trackable list.*/
-
     private int trackabelID;
     private String name;
     private String trackableDes;
     private String URL;
     private String category;
-    private double currentLong;
-    private double currentLat;
     private ArrayList<Double> stationaryLong = new ArrayList<>();
     private ArrayList<Double> stationaryLat = new ArrayList<>();
     private ArrayList<String> stationaryStartTime = new ArrayList<>();
     private ArrayList<String> stationaryEndTime = new ArrayList<>();
     private int chosenStationary;
 
+    //How should I create interface and abstract for a class that only holds variables?
 
     Trackable(int trackabelID, String name, String trackableDes, String URL, String category) {
         this.trackabelID = trackabelID;
@@ -51,31 +45,13 @@ public class Trackable {
         return category;
     }
 
-    public double getCurrentLong() {
-        return currentLong;
-    }
-
-    public double getCurrentLat() {
-        return currentLat;
-    }
-
-    public void setCurrentLong(double currentLong) {
-        this.currentLong = currentLong;
-    }
-
-    public void setCurrentLat(double currentLat) {
-        this.currentLat = currentLat;
-    }
-
     public ArrayList<Double> getStationaryLong() {
         return stationaryLong;
     }
 
-
     public ArrayList<Double> getStationaryLat() {
         return stationaryLat;
     }
-
 
     public ArrayList<String> getStationaryStartTime() {
         return stationaryStartTime;
@@ -83,10 +59,6 @@ public class Trackable {
 
     public ArrayList<String> getStationaryEndTime() {
         return stationaryEndTime;
-    }
-
-    public int getChosenStationary() {
-        return chosenStationary;
     }
 
     public void setChosenStationary(int chosenStationary) {

@@ -54,7 +54,10 @@
         <activity
             android:name=".view.tracking.TrackingListActivity"
             android:label="@string/tracking_list" />
-        <activity android:name=".view.StationaryPeriodListActivity"></activity>
+        <activity
+            android:name=".view.StationaryPeriodListActivity"
+            android:label="@string/pick_meet_time">
+        </activity>
     </application>
 
 </manifest>

@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:textSize="30sp"
-                android:text="Title"
+                android:text="@string/title"
                 android:textColor="#000"
                 android:textStyle="bold"
                 />
@@ -39,7 +39,7 @@
                 android:layout_marginEnd="333dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="17dp"
-                android:text="Description"
+                android:text="@string/description"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
 
@@ -52,7 +52,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="17dp"
                 android:textSize="18sp"
-                android:text="Description"
+                android:text="@string/description"
                 android:textColor="#000"/>
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_marginEnd="333dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="17dp"
-                android:text="Website URL:"
+                android:text="@string/url"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -74,7 +74,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="17dp"
                 android:textSize="18sp"
-                android:text="URL"
+                android:text="@string/url"
                 android:textColor="#000" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_marginEnd="333dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="17dp"
-                android:text="Category"
+                android:text="@string/category"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -96,7 +96,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="17dp"
                 android:textSize="18sp"
-                android:text="Category"
+                android:text="@string/category"
                 android:textColor="#000"
                 />
         </LinearLayout>

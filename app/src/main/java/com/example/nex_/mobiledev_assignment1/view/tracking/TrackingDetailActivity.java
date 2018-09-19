@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
+import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.controller.Listeners;
+import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.view.AddTrackingActivity;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
 
@@ -21,8 +23,8 @@ public class TrackingDetailActivity extends ParentActivity {
     private String trackingEndTime;
     private String trackingMeetTime;
     private String trackingMeetLocation;
-    private String trackingCurrentLocation;
     private static int pickedEvent;
+    private static int pickedTrackableID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class TrackingDetailActivity extends ParentActivity {
         switch (item.getItemId()) {
             case R.id.action_edit:
                 isEdit = true;
+                //Push current info to edit activity
                 Intent edit = new Intent(this, AddTrackingActivity.class);
                 edit.putExtra("title", trackingTitle);
                 edit.putExtra("start_time", trackingStartTime);
@@ -78,6 +81,7 @@ public class TrackingDetailActivity extends ParentActivity {
              trackingMeetTime = getIntent().getStringExtra("tracking_meet_time");
              trackingMeetLocation = getIntent().getStringExtra("tracking_meet_location");
              pickedEvent = getIntent().getIntExtra("picked_event", 0);
+             pickedTrackableID = getIntent().getIntExtra("picked_trackable_id",0);
             setTrackingDetail(trackingTitle,trackingStartTime,trackingMeetTime,trackingEndTime,trackingMeetLocation);
         }
 
@@ -87,13 +91,20 @@ public class TrackingDetailActivity extends ParentActivity {
         Log.d(TAG, "setTrackingDetail: setting to tracking details");
         TextView title = (TextView) findViewById(R.id.trackingTitle);
         title.setText(trackingTitle);
+
         TextView startTime = (TextView) findViewById(R.id.trackingStartTime);
         startTime.setText(trackingStartTime);
+
         TextView meetTime = (TextView) findViewById(R.id.trackingMeetTime);
         meetTime.setText(TrackingMeetTime);
+
         TextView endTime = (TextView) findViewById(R.id.trackingEndTime);
         endTime.setText(trackingEndTime);
+
         TextView currentLocation = (TextView) findViewById(R.id.trackingCurrentLocation);
+        Controller.getInstance().setCurrentTrackable(pickedTrackableID);
+        currentLocation.setText(TrackingInfoProcessing.getCurrentLocation());
+
         TextView meetLocation = (TextView) findViewById(R.id.trackingMeetLocation);
         meetLocation.setText(trackingMeetLocation);
     }
