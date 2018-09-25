@@ -33,11 +33,11 @@ public class TrackableDetailActivity extends ParentActivity {
 
         Log.d(TAG, "onCreate: Current trackable ID " + currentTrackableID);
 
-        if (whoCalling != null && whoCalling.equals("ParentActivity")){
+        //if (whoCalling != null && whoCalling.equals("ParentActivity")){
             addEventFab.setVisibility(View.VISIBLE);
 
 
-        }
+       // }
     }
 
     @Override

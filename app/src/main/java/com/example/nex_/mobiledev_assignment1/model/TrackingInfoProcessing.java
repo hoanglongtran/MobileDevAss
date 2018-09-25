@@ -29,6 +29,8 @@ public class TrackingInfoProcessing {
     private static final Pattern latitudeRegex = Pattern.compile(".*lat=(-?\\d*\\.\\d*).*");
     private static final Pattern timeRegex = Pattern.compile(".*Date\\/Time=(\\d{1,2}\\/\\d{1,2}\\/\\d{2} \\d{1,2}:\\d{2}:\\d{2} (AM|PM))");
 
+
+
     public static void getData(Context context)
     {
         TrackingService trackingService = TrackingService.getSingletonInstance(context);
@@ -55,6 +57,7 @@ public class TrackingInfoProcessing {
         }
 
     }
+
 
     private static void convertDataToString(){
         for (int i = 0; i < data.size(); i ++){

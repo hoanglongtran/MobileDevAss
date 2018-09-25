@@ -37,7 +37,7 @@ public class TrackableListActivity extends ParentActivity {
         Log.d(TAG, "onCreate: started");
         if (key){
             //prevent initialize objects twice
-            Controller.getInstance().initTrackables();
+            Controller.getInstance().initTrackables(this);
 
             key = false;
         }

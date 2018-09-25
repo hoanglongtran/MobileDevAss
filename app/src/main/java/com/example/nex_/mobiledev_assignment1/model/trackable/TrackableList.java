@@ -32,9 +32,7 @@ public class TrackableList {
     }
 
     public ArrayList<String> getTrackableNames() {
-
         return trackableNames;
-
     }
     public ArrayList<String> getTrackableCategory(){
         return trackableCategory;
