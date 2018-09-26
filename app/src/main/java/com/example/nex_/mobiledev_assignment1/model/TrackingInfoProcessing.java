@@ -84,12 +84,26 @@ public class TrackingInfoProcessing {
         Matcher v;
         Matcher c;
         Matcher time;
+        String currentTime = getTime();
         String startTime;
         int stopDuration = 0;
         double longitude = 0;
         double latitude = 0;
         for (int i = 0; i< currentTrackableData.size(); i++) {
             m = stopTimeRegex.matcher(currentTrackableData.get(i));
+            Pattern currentTimeRegex = Pattern.compile(".*" + currentTime + ".*");
+            Matcher match = currentTimeRegex.matcher(currentTrackableData.get(i));
+            if (match.find()){
+                Matcher currentLong = longitudeRegex.matcher(currentTrackableData.get(i));
+                Matcher currentLat = latitudeRegex.matcher(currentTrackableData.get(i));
+                if(currentLong.find()) {
+                    longitude = currentLong.group(1);
+                }
+                if (currentLat.find()) {
+                    latitude = currentLat.group(1);
+                }
+            }
+
             if (m.find()){
                 System.out.println(m.group(1));
                 stopDuration = Integer.parseInt(m.group(1));

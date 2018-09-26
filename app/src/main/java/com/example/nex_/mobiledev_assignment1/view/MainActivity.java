@@ -1,14 +1,18 @@
 package com.example.nex_.mobiledev_assignment1.view;
 
+import android.app.job.JobInfo;
+import android.content.ComponentName;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.controller.Listeners;
+import com.example.nex_.mobiledev_assignment1.model.TrackingJobService;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -64,5 +68,10 @@ public class MainActivity extends ParentActivity {
     }
 
 
+    public void scheduleJob(View v){
+        ComponentName componentName  = new ComponentName(this, TrackingJobService.class);
+        JobInfo info = new JobInfo.Builder(123, componentName)
+                .setPeriodic(5000000, JobInfo.getMinFlexMillis()).build();
+    }
 
 }
