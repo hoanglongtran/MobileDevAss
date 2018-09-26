@@ -45,10 +45,11 @@ public class Listeners extends FragmentActivity implements View.OnClickListener 
                 break;
 
             case R.id.add_event_fab:
-                Intent addTracking = new Intent(v.getContext(), StationaryPeriodListActivity.class);
+                Intent addTracking = new Intent(v.getContext(), AddTrackingActivity.class);
                 Controller.getInstance().setCurrentTrackable(TrackableDetailActivity.getCurrentTrackableID());
                 TrackingInfoProcessing.getMeetLocation();
-               v.getContext().startActivity(addTracking);
+
+                v.getContext().startActivity(addTracking);
                 break;
             case R.id.deleteEvent:
                 int pickedEvent = AddTrackingActivity.getPickedEvent();

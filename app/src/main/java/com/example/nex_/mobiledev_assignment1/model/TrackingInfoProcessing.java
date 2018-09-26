@@ -77,10 +77,10 @@ public class TrackingInfoProcessing {
         }
     }
 
-    //Search throught the extracted info and get all the meet location and time
+    //Search through the extracted info and get all the meet location and time
     public static void getMeetLocation(){
 
-        Matcher m;
+        Matcher stopTimeMatcher;
         Matcher v;
         Matcher c;
         Matcher time;
@@ -89,31 +89,24 @@ public class TrackingInfoProcessing {
         int stopDuration = 0;
         double longitude = 0;
         double latitude = 0;
+
+        //Go through the current tracking data
         for (int i = 0; i< currentTrackableData.size(); i++) {
-            m = stopTimeRegex.matcher(currentTrackableData.get(i));
+
+            stopTimeMatcher = stopTimeRegex.matcher(currentTrackableData.get(i));
             Pattern currentTimeRegex = Pattern.compile(".*" + currentTime + ".*");
             Matcher match = currentTimeRegex.matcher(currentTrackableData.get(i));
-            if (match.find()){
-                Matcher currentLong = longitudeRegex.matcher(currentTrackableData.get(i));
-                Matcher currentLat = latitudeRegex.matcher(currentTrackableData.get(i));
-                if(currentLong.find()) {
-                    longitude = currentLong.group(1);
-                }
-                if (currentLat.find()) {
-                    latitude = currentLat.group(1);
-                }
-            }
 
-            if (m.find()){
-                System.out.println(m.group(1));
-                stopDuration = Integer.parseInt(m.group(1));
-            }
-            if (stopDuration > 0) {
+            //Search for current time
+            if (match.find()){
                 v = longitudeRegex.matcher(currentTrackableData.get(i));
                 c = latitudeRegex.matcher(currentTrackableData.get(i));
                 time = timeRegex.matcher(currentTrackableData.get(i));
+                // the current time
                 if (time.find()){
                     startTime = time.group(1);
+
+                    //startTime = match.group(1);
                     TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryStartTime().add(startTime);
                     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy hh:mm:ss aa");
                     try {
@@ -138,7 +131,19 @@ public class TrackingInfoProcessing {
                     latitude = Double.parseDouble(c.group(1));
                     TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLat().add(latitude);
                 }
+
+
+
+                /*if (stopTimeMatcher.find()){
+                    System.out.println(stopTimeMatcher.group(1));
+                    stopDuration = Integer.parseInt(stopTimeMatcher.group(1));
+                }
+                if (stopDuration > 0) {
+
+                }*/
             }
+
+
         }
         //Clear current data
         currentTrackableData.clear();

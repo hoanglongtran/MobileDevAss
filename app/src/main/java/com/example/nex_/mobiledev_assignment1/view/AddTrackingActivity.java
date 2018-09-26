@@ -43,7 +43,7 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
     private Calendar startTimeLimit;
     private Calendar endTimeLimit;
     private Calendar meetTime;
-
+    private static int currentTrackableID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
         getIncomingIntent();
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
+        currentTrackableID = TrackingInfoProcessing.getCurrentTrackableID();
         //Button button = (Button) findViewById(R.id.timePicker);
         //button.setOnClickListener(Listeners.getInstance());
 
