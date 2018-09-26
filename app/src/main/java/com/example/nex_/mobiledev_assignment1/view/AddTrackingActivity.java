@@ -19,6 +19,7 @@ import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.controller.Listeners;
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
+import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 import com.example.nex_.mobiledev_assignment1.model.tracking.Tracking;
 import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
 import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableDetailActivity;
@@ -205,7 +206,7 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
         Log.d(TAG, "getIncomingIntent: checking for incoming intent");
         //Check if coming intent has all required info
 
-        if (getIntent().hasExtra("stationary_start") && getIntent().hasExtra("stationary_end")
+        /*if (getIntent().hasExtra("stationary_start") && getIntent().hasExtra("stationary_end")
                 && getIntent().hasExtra("stationary_long") && getIntent().hasExtra("stationary_lat") && getIntent().hasExtra("clicked_position")) {
             Log.d(TAG, "getIncomingIntent: found intent extra");
             //check if have extra first before calling to prevent crashing when calling getStringExtra
@@ -219,7 +220,7 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
             //Display start time, end time f
             setEditTrackingDetail();
 
-        }else if (isEdit && getIntent().hasExtra("title") && getIntent().hasExtra("start_time") && getIntent().hasExtra("meet_time") && getIntent().hasExtra("end_time")
+        }else*/ if (isEdit && getIntent().hasExtra("title") && getIntent().hasExtra("start_time") && getIntent().hasExtra("meet_time") && getIntent().hasExtra("end_time")
                 && getIntent().hasExtra("meet_location")){
             title = getIntent().getStringExtra("title");
             stationaryStartTime = getIntent().getStringExtra("start_time");
@@ -228,6 +229,15 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
             meetLocation = getIntent().getStringExtra("meet_location");
             pickedEvent = getIntent().getIntExtra("picked_event", 0);
             setEditTrackingDetail();
+        }else{
+            Log.d(TAG, "getIncomingIntent: get data from trackable");
+            stationaryStartTime = TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryStartTime().get(currentTrackableID);
+            stationaryEndTime = TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryEndTime().get(currentTrackableID);
+            stationaryLong = Double.toString(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLong().get(currentTrackableID));
+            stationaryLat = Double.toString(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLat().get(currentTrackableID));
+            meetLocation = stationaryLat + ",  " + stationaryLong;
+            //Save the clicked position so that we know which stationary time user picked
+            //pickedEvent = getIntent().getIntExtra("clicked_position", 0);
         }
 
 
