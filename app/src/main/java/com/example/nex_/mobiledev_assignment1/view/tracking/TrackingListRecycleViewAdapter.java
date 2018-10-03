@@ -36,7 +36,7 @@ public class TrackingListRecycleViewAdapter extends RecyclerView.Adapter<Trackin
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
         holder.trackingTitle.setText(mTrackingTitle.get(position));
         holder.trackingMeetTime.setText(mTrackingMeetTime.get(position));
@@ -44,13 +44,13 @@ public class TrackingListRecycleViewAdapter extends RecyclerView.Adapter<Trackin
             @Override
             public void onClick(View v) {
                 Intent trackingDetail = new Intent(v.getContext(), TrackingDetailActivity.class);
-                trackingDetail.putExtra("tracking_title", TrackingList.getInstance().getTrackingList().get(position).getTitle());
-                trackingDetail.putExtra("tracking_start_time", TrackingList.getInstance().getTrackingList().get(position).getStartTime());
-                trackingDetail.putExtra("tracking_meet_time", TrackingList.getInstance().getTrackingList().get(position).getMeetTime());
-                trackingDetail.putExtra("tracking_end_time", TrackingList.getInstance().getTrackingList().get(position).getEndTime());
-                trackingDetail.putExtra("tracking_meet_location", TrackingList.getInstance().getTrackingList().get(position).getMeetLocation());
-                trackingDetail.putExtra("picked_trackable_id", TrackingList.getInstance().getTrackingList().get(position).getTrackableID());
-                trackingDetail.putExtra("picked_event", position);
+                trackingDetail.putExtra("tracking_title", TrackingList.getInstance().getTrackingList().get(holder.getAdapterPosition()).getTitle());
+                trackingDetail.putExtra("tracking_start_time", TrackingList.getInstance().getTrackingList().get(holder.getAdapterPosition()).getStartTime());
+                trackingDetail.putExtra("tracking_meet_time", TrackingList.getInstance().getTrackingList().get(holder.getAdapterPosition()).getMeetTime());
+                trackingDetail.putExtra("tracking_end_time", TrackingList.getInstance().getTrackingList().get(holder.getAdapterPosition()).getEndTime());
+                trackingDetail.putExtra("tracking_meet_location", TrackingList.getInstance().getTrackingList().get(holder.getAdapterPosition()).getMeetLocation());
+                trackingDetail.putExtra("picked_trackable_id", TrackingList.getInstance().getTrackingList().get(holder.getAdapterPosition()).getTrackableID());
+                trackingDetail.putExtra("picked_event", holder.getAdapterPosition());
                 v.getContext().startActivity(trackingDetail);
             }
         });

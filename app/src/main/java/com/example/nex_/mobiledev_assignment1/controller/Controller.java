@@ -47,9 +47,6 @@ public class Controller {
 
     public void addTracking(Context context, String title, int currentTrackableID, String stationaryStartTime , String meetTime, String stationaryEndTime, String meetLocation){
         TrackingList.getInstance().addTracking(context, title, currentTrackableID, stationaryStartTime ,meetTime, stationaryEndTime, meetLocation);
-
-
-
     }
 
 }
