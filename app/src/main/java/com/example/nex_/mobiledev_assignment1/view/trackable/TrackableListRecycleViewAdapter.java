@@ -44,7 +44,7 @@ public class TrackableListRecycleViewAdapter extends RecyclerView.Adapter<Tracka
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
         holder.trackableName.setText(mTrackableName.get(position));
         holder.trackableCategory.setText(mTrackableCategory.get(position));
@@ -52,13 +52,14 @@ public class TrackableListRecycleViewAdapter extends RecyclerView.Adapter<Tracka
             @Override
             public void onClick(View v) {
                 Intent trackableDetail = new Intent(v.getContext(), TrackableDetailActivity.class);
-                trackableDetail.putExtra("trackable_id", TrackableList.getInstance().getTrackablesList().get(position).getTrackabelID());
-                trackableDetail.putExtra("trackable_name", TrackableList.getInstance().getTrackablesList().get(position).getName());
-                trackableDetail.putExtra("trackable_des", TrackableList.getInstance().getTrackablesList().get(position).getTackableDes());
-                trackableDetail.putExtra("trackable_url", TrackableList.getInstance().getTrackablesList().get(position).getURL());
-                trackableDetail.putExtra("trackable_category", TrackableList.getInstance().getTrackablesList().get(position).getCategory());
+                trackableDetail.putExtra("trackable_id", TrackableList.getInstance().getTrackablesList().get(holder.getAdapterPosition()).getTrackabelID());
+                trackableDetail.putExtra("trackable_name", TrackableList.getInstance().getTrackablesList().get(holder.getAdapterPosition()).getName());
+                trackableDetail.putExtra("trackable_des", TrackableList.getInstance().getTrackablesList().get(holder.getAdapterPosition()).getTackableDes());
+                trackableDetail.putExtra("trackable_url", TrackableList.getInstance().getTrackablesList().get(holder.getAdapterPosition()).getURL());
+                trackableDetail.putExtra("trackable_category", TrackableList.getInstance().getTrackablesList().get(holder.getAdapterPosition()).getCategory());
+                trackableDetail.putExtra("current_trackable_index", holder.getAdapterPosition());
                 trackableDetail.putExtra("whoCalled", whoCalling);
-                Log.d(TAG, "onClick: Clicked position:"+position);
+                Log.d(TAG, "onClick: Clicked position:"+holder.getAdapterPosition());
                 v.getContext().startActivity(trackableDetail);
             }
         });

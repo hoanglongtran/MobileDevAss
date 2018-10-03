@@ -9,10 +9,10 @@ public class Trackable {
     private String trackableDes;
     private String URL;
     private String category;
-    private ArrayList<Double> stationaryLong = new ArrayList<>();
-    private ArrayList<Double> stationaryLat = new ArrayList<>();
-    private ArrayList<String> stationaryStartTime = new ArrayList<>();
-    private ArrayList<String> stationaryEndTime = new ArrayList<>();
+    private Double stationaryLong = 0.0;
+    private Double stationaryLat = 0.0;
+    private String stationaryStartTime = "";
+    private String stationaryEndTime = "";
     private int chosenStationary;
 
     //How should I create interface and abstract for a class that only holds variables?
@@ -45,7 +45,7 @@ public class Trackable {
         return category;
     }
 
-    public ArrayList<Double> getStationaryLong() {
+    /*public ArrayList<Double> getStationaryLong() {
         return stationaryLong;
     }
 
@@ -59,9 +59,41 @@ public class Trackable {
 
     public ArrayList<String> getStationaryEndTime() {
         return stationaryEndTime;
+    }*/
+
+    public void setStationaryLong(Double stationaryLong) {
+        this.stationaryLong = stationaryLong;
     }
 
-    public void setChosenStationary(int chosenStationary) {
-        this.chosenStationary = chosenStationary;
+    public void setStationaryLat(Double stationaryLat) {
+        this.stationaryLat = stationaryLat;
     }
+
+    public void setStationaryStartTime(String stationaryStartTime) {
+        this.stationaryStartTime = stationaryStartTime;
+    }
+
+    public void setStationaryEndTime(String stationaryEndTime) {
+        this.stationaryEndTime = stationaryEndTime;
+    }
+
+    public Double getStationaryLong() {
+        return stationaryLong;
+    }
+
+    public Double getStationaryLat() {
+        return stationaryLat;
+    }
+
+    public String getStationaryStartTime() {
+        return stationaryStartTime;
+    }
+
+    public String getStationaryEndTime() {
+        return stationaryEndTime;
+    }
+
+    /*public void setChosenStationary(int chosenStationary) {
+        this.chosenStationary = chosenStationary;
+    }*/
 }

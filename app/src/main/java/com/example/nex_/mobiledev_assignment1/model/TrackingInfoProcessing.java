@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
+import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableDetailActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -16,10 +17,13 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class TrackingInfoProcessing {
 
     private static final String LOG_TAG = TrackingService.class.getName();
     private static int currentTrackableID;
+    private static int currentTrackableIndex = TrackableDetailActivity.getCurrentTrackableIndex();
     private static List<TrackingService.TrackingInfo> data;
     private static ArrayList<String> dataString = new ArrayList<>();
     private static ArrayList<String> currentTrackableData = new ArrayList<>();
@@ -104,43 +108,45 @@ public class TrackingInfoProcessing {
                 time = timeRegex.matcher(currentTrackableData.get(i));
                 // the current time
                 if (time.find()){
-                    startTime = time.group(1);
+                    if (stopTimeMatcher.find()){
+                        System.out.println(stopTimeMatcher.group(1));
+                        stopDuration = Integer.parseInt(stopTimeMatcher.group(1));
+                    }
+                    if (stopDuration > 0) {
+                        startTime = time.group(1);
+                        Log.d(TAG, "getMeetLocation: index:" + currentTrackableIndex);
+                        Log.d(TAG, "getMeetLocation: current ID:" + currentTrackableID);
+                        //startTime = match.group(1);
 
-                    //startTime = match.group(1);
-                    TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryStartTime().add(startTime);
-                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy hh:mm:ss aa");
-                    try {
-                        Date d = df.parse(startTime);
-                        Calendar cal = Calendar.getInstance();
-                        cal.setTime(d);
-                        cal.add(Calendar.MINUTE, stopDuration);
-                        String endTime = df.format(cal.getTime());
-                        TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryEndTime().add(endTime);
-                    }catch (ParseException e)
-                    {
-                        e.printStackTrace();
+                        TrackableList.getInstance().getTrackablesList().get(currentTrackableIndex).setStationaryStartTime(startTime);
+                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy hh:mm:ss aa");
+                        try {
+                            Date d = df.parse(startTime);
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(d);
+                            cal.add(Calendar.MINUTE, stopDuration);
+                            String endTime = df.format(cal.getTime());
+                            TrackableList.getInstance().getTrackablesList().get(currentTrackableIndex).setStationaryEndTime(endTime);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        if (v.find()) {
+                            longitude = Double.parseDouble(v.group(1));
+                            TrackableList.getInstance().getTrackablesList().get(currentTrackableIndex).setStationaryLong(longitude);
+                        }
+                        if (c.find()) {
+                            latitude = Double.parseDouble(c.group(1));
+                            TrackableList.getInstance().getTrackablesList().get(currentTrackableIndex).setStationaryLat(latitude);
+                        }
                     }
 
 
-                }
-                if(v.find()) {
-                    longitude = Double.parseDouble(v.group(1));
-                    TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLong().add(longitude);
-                }
-                if (c.find()) {
-                    latitude = Double.parseDouble(c.group(1));
-                    TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLat().add(latitude);
-                }
 
 
 
-                /*if (stopTimeMatcher.find()){
-                    System.out.println(stopTimeMatcher.group(1));
-                    stopDuration = Integer.parseInt(stopTimeMatcher.group(1));
                 }
-                if (stopDuration > 0) {
-
-                }*/
             }
 
 
@@ -178,7 +184,7 @@ public class TrackingInfoProcessing {
 
     private static String getTime(){
         //This one is to test the get current location method, which will return the location at 1:15
-        return "1:20";
+        return "1:12";
         //This one will return the date from the system
         //return new SimpleDateFormat("h:mm").format(new java.util.Date());
     }

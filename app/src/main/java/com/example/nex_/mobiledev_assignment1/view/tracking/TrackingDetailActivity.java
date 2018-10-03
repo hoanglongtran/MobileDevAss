@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.controller.Controller;
-import com.example.nex_.mobiledev_assignment1.controller.Listeners;
+import com.example.nex_.mobiledev_assignment1.controller.GetCurrentLocationListener;
+import com.example.nex_.mobiledev_assignment1.controller.TrackEventListener;
 import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.view.AddTrackingActivity;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
@@ -34,7 +35,7 @@ public class TrackingDetailActivity extends ParentActivity {
         setSupportActionBar(myToolbar);
         getIncomingIntent();
         Button track = (Button) findViewById(R.id.track);
-        track.setOnClickListener(Listeners.getInstance());
+        track.setOnClickListener(TrackEventListener.getInstance());
     }
 
     @Override

@@ -1,5 +1,9 @@
 package com.example.nex_.mobiledev_assignment1.model.tracking;
 
+import android.content.Context;
+
+import com.example.nex_.mobiledev_assignment1.model.DatabaseHelper;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -25,12 +29,18 @@ public class TrackingList {
         trackingMeetTime = new ArrayList<>();
 
     }
-    public void addTracking(String title, int trackableID, String startTime, String meetTime,  String endTime, String meetLocation){
+    public void addTracking(Context context,String title, int trackableID, String startTime, String meetTime, String endTime, String meetLocation){
         String ID = UUID.randomUUID().toString();
         Tracking tracking = new Tracking(ID, title, trackableID, startTime, endTime, meetTime, meetLocation);
+        DatabaseHelper.getInstance(context).insertTrackingData(ID, title, startTime, meetTime, endTime, meetLocation, trackableID);
         trackingList.add(tracking);
         trackingTitle.add(title);
         trackingMeetTime.add(meetTime);
+
+    }
+
+    public void deleteTracking(int pickedEvent){
+        TrackingList.getInstance().getTrackingList().remove(pickedEvent);
 
     }
 

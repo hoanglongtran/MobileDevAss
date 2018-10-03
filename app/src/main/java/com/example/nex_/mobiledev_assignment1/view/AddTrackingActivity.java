@@ -16,12 +16,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.nex_.mobiledev_assignment1.controller.Controller;
-import com.example.nex_.mobiledev_assignment1.controller.Listeners;
+import com.example.nex_.mobiledev_assignment1.controller.DeleteEventListener;
+import com.example.nex_.mobiledev_assignment1.controller.GetCurrentLocationListener;
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
-import com.example.nex_.mobiledev_assignment1.model.tracking.Tracking;
-import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
 import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableDetailActivity;
 import com.example.nex_.mobiledev_assignment1.view.tracking.TrackingListActivity;
 
@@ -44,7 +43,8 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
     private Calendar startTimeLimit;
     private Calendar endTimeLimit;
     private Calendar meetTime;
-    private static int currentTrackableID;
+    private static int currentTrackableID = TrackableDetailActivity.getCurrentTrackableID();
+    private static int currentTrackableIndex = TrackableDetailActivity.getCurrentTrackableIndex();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +58,13 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
         setSupportActionBar(myToolbar);
         currentTrackableID = TrackingInfoProcessing.getCurrentTrackableID();
         //Button button = (Button) findViewById(R.id.timePicker);
-        //button.setOnClickListener(Listeners.getInstance());
+        //button.setOnClickListener(GetCurrentLocationListener.getInstance());
 
 
         Button delete = (Button) findViewById(R.id.deleteEvent);
         if (isEdit){
             delete.setVisibility(View.VISIBLE);
-            delete.setOnClickListener(Listeners.getInstance());
+            delete.setOnClickListener(DeleteEventListener.getInstance());
         }
 
         //Calling this from Listener class will cause java.lang.IllegalStateException
@@ -174,21 +174,14 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
                 int currentTrackableID = TrackableDetailActivity.getCurrentTrackableID();
                 String meetTime = addMeetTIme.getText().toString();
 
-                Controller.getInstance().addTracking(title, currentTrackableID, stationaryStartTime ,meetTime, stationaryEndTime, meetLocation);
-                StationaryPeriodListActivity.getmStationaryLong().clear();
-                StationaryPeriodListActivity.getmStationaryLat().clear();
-                StationaryPeriodListActivity.getmStationaryStart().clear();
-                StationaryPeriodListActivity.getmStationaryEndTime().clear();
+                Controller.getInstance().addTracking(this, title, currentTrackableID, stationaryStartTime ,meetTime, stationaryEndTime, meetLocation);
+
                 Intent goBack = new Intent(this, TrackingListActivity.class);
                 goBack.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(goBack);
                 finish();
                 return true;
             case R.id.action_cancel:
-                StationaryPeriodListActivity.getmStationaryEndTime().clear();
-                StationaryPeriodListActivity.getmStationaryStart().clear();
-                StationaryPeriodListActivity.getmStationaryLat().clear();
-                StationaryPeriodListActivity.getmStationaryLong().clear();
                 Intent cancel = new Intent(this, TrackingListActivity.class);
                 cancel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(cancel);
@@ -229,15 +222,17 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
             meetLocation = getIntent().getStringExtra("meet_location");
             pickedEvent = getIntent().getIntExtra("picked_event", 0);
             setEditTrackingDetail();
-        }else{
+        }else if (getIntent().hasExtra("current_trackable_id")){
             Log.d(TAG, "getIncomingIntent: get data from trackable");
-            stationaryStartTime = TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryStartTime().get(currentTrackableID);
-            stationaryEndTime = TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryEndTime().get(currentTrackableID);
-            stationaryLong = Double.toString(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLong().get(currentTrackableID));
-            stationaryLat = Double.toString(TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLat().get(currentTrackableID));
+            stationaryStartTime = TrackableList.getInstance().getTrackablesList().get(currentTrackableIndex).getStationaryStartTime();
+            stationaryEndTime = TrackableList.getInstance().getTrackablesList().get(currentTrackableIndex).getStationaryEndTime();
+            stationaryLong = Double.toString(TrackableList.getInstance().getTrackablesList().get(currentTrackableIndex).getStationaryLong());
+            stationaryLat = Double.toString(TrackableList.getInstance().getTrackablesList().get(currentTrackableIndex).getStationaryLat());
             meetLocation = stationaryLat + ",  " + stationaryLong;
+            currentTrackableID = getIntent().getIntExtra("current_trackable_id", 0);
             //Save the clicked position so that we know which stationary time user picked
             //pickedEvent = getIntent().getIntExtra("clicked_position", 0);
+            setEditTrackingDetail();
         }
 
 
@@ -245,6 +240,8 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
 
     private void setEditTrackingDetail(){
         Log.d(TAG, "setTrackingDetail: add event");
+        Log.d(TAG, "setEditTrackingDetail: current Trackable index:" + currentTrackableIndex);
+        Log.d(TAG, "setEditTrackingDetail: current Trackable ID:" + currentTrackableID);
         EditText titleView = (EditText) findViewById(R.id.addTitle);
         titleView.setText(title);
         TextView startTime = (TextView) findViewById(R.id.addStartTime);
@@ -254,7 +251,7 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
         TextView endTime = (TextView) findViewById(R.id.addEndTime);
         endTime.setText(stationaryEndTime);
         TextView currentLocation = (TextView) findViewById(R.id.addCurrentLocation);
-        Controller.getInstance().setCurrentTrackable(pickedEvent);
+        Controller.getInstance().setCurrentTrackable(currentTrackableID);
         currentLocation.setText(TrackingInfoProcessing.getCurrentLocation());
         TextView meetLocationView = (TextView) findViewById(R.id.addMeetLocation);
         meetLocationView.setText(meetLocation);

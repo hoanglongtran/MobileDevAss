@@ -44,7 +44,7 @@ public class StationaryPeriodListRecycleViewAdapter extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
-        TrackableList.getInstance().getTrackablesList().get(TrackableDetailActivity.getCurrentTrackableID()).setChosenStationary(position);
+        //TrackableList.getInstance().getTrackablesList().get(TrackableDetailActivity.getCurrentTrackableID()).setChosenStationary(position);
         holder.stationaryStartTime.setText(mStationaryStartTIme.get(position));
         holder.stationaryEndTime.setText(mStationaryEndTime.get(position));
         holder.stationaryLat.setText(Double.toString(mStationaryLat.get(position)));
@@ -53,10 +53,10 @@ public class StationaryPeriodListRecycleViewAdapter extends RecyclerView.Adapter
             @Override
             public void onClick(View v) {
                 Intent addActivity = new Intent(v.getContext(), AddTrackingActivity.class);
-                addActivity.putExtra("stationary_start", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryStartTime().get(position));
+                /*addActivity.putExtra("stationary_start", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryStartTime().get(position));
                 addActivity.putExtra("stationary_end", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryEndTime().get(position));
                 addActivity.putExtra("stationary_long", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLong().get(position));
-                addActivity.putExtra("stationary_lat", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLat().get(position));
+                addActivity.putExtra("stationary_lat", TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLat().get(position));*/
                 addActivity.putExtra("clicked_position", position);
                 Log.d(TAG, "onClick: Clicked position: " + position);
                 v.getContext().startActivity(addActivity);

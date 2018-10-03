@@ -2,6 +2,7 @@ package com.example.nex_.mobiledev_assignment1.controller;
 
 import android.content.Context;
 
+import com.example.nex_.mobiledev_assignment1.model.DatabaseHelper;
 import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableIO;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
@@ -44,8 +45,11 @@ public class Controller {
 
     }
 
-    public void addTracking(String title, int currentTrackableID, String stationaryStartTime , String meetTime, String stationaryEndTime, String meetLocation){
-        TrackingList.getInstance().addTracking(title, currentTrackableID, stationaryStartTime ,meetTime, stationaryEndTime, meetLocation);
+    public void addTracking(Context context, String title, int currentTrackableID, String stationaryStartTime , String meetTime, String stationaryEndTime, String meetLocation){
+        TrackingList.getInstance().addTracking(context, title, currentTrackableID, stationaryStartTime ,meetTime, stationaryEndTime, meetLocation);
+
+
+
     }
 
 }

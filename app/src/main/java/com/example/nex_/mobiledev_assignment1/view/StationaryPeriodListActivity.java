@@ -87,10 +87,10 @@ public class StationaryPeriodListActivity extends ParentActivity {
 
     private void initName(){
         Log.d(TAG, "initName: preparing names");
-        mStationaryStart = TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryStartTime() ;
+        /*mStationaryStart = TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryStartTime() ;
         mStationaryEndTime = TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryEndTime();
         mStationaryLat = TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLat();
-        mStationaryLong = TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLong();
+        mStationaryLong = TrackableList.getInstance().getTrackablesList().get(currentTrackableID).getStationaryLong();*/
         initRecyclerView();
     }
 

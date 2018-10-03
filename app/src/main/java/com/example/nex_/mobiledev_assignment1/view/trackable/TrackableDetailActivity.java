@@ -9,14 +9,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.nex_.mobiledev_assignment1.R;
-import com.example.nex_.mobiledev_assignment1.controller.Listeners;
-import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
+import com.example.nex_.mobiledev_assignment1.controller.AddEventListener;
+import com.example.nex_.mobiledev_assignment1.controller.GetCurrentLocationListener;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
 
 public class TrackableDetailActivity extends ParentActivity {
     private static final String TAG = "TrackableDetailActivity";
     private static String whoCalling;
     private static int currentTrackableID;
+    private static int currentTrackableIndex;
 
 
     @Override
@@ -28,7 +29,7 @@ public class TrackableDetailActivity extends ParentActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         FloatingActionButton addEventFab = (FloatingActionButton) findViewById(R.id.add_event_fab);
-        addEventFab.setOnClickListener(Listeners.getInstance());
+        addEventFab.setOnClickListener(AddEventListener.getInstance());
         setSupportActionBar(myToolbar);
 
         Log.d(TAG, "onCreate: Current trackable ID " + currentTrackableID);
@@ -67,6 +68,7 @@ public class TrackableDetailActivity extends ParentActivity {
             setTrackableDetail(trackableName,trackableDes,trackableURL,trackableCategory);
         }
         if (getIntent().hasExtra("trackable_id")){
+            currentTrackableIndex = getIntent().getIntExtra("current_trackable_index",0);
             currentTrackableID = getIntent().getIntExtra("trackable_id",0);
             System.out.println("Test " + getIntent().getIntExtra("trackable_id",0));
         }
@@ -75,6 +77,9 @@ public class TrackableDetailActivity extends ParentActivity {
 
     public static int getCurrentTrackableID() {
         return currentTrackableID;
+    }
+    public static int getCurrentTrackableIndex(){
+        return currentTrackableIndex;
     }
 
     private void setTrackableDetail(String trackableName, String trackableDes, String trackableURL, String trackableCategory){
