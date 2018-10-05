@@ -1,16 +1,16 @@
 package com.example.nex_.mobiledev_assignment1.view;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -23,6 +23,7 @@ import com.example.nex_.mobiledev_assignment1.controller.TrackingListButtonListe
 import com.example.nex_.mobiledev_assignment1.controller.TrackableListButtonListener;
 import com.example.nex_.mobiledev_assignment1.controller.GetCurrentLocationListener;
 import com.example.nex_.mobiledev_assignment1.controller.NotificationReceiver;
+import com.example.nex_.mobiledev_assignment1.model.NetworkReceiver;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -35,14 +36,25 @@ import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
-import static com.example.nex_.mobiledev_assignment1.model.App.CHANNEL_1_ID;
-
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
     private GoogleMap mMap;
-    private NotificationManagerCompat notificationManager;
+
     private Context mContext;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
 
     //private MapView mapView;
     @Override
@@ -52,11 +64,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         //Read through the file to get tracking data
-        Controller.getInstance().getData(this);
+        Controller.getInstance().getTrackingData(this);
 
         //Add a floating button to get location
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(GetCurrentLocationListener.getInstance());
+
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -82,7 +96,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         final Button button2 = (Button) findViewById(R.id.trackingListButton);
         button2.setOnClickListener(TrackingListButtonListener.getInstance());
 
-        notificationManager = NotificationManagerCompat.from(this);
+
 
     }
 
@@ -127,34 +141,22 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     //Setup the notification
     public void sendOnChannel1(View v){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         //Set the intent that will triggered when user taps the notification
-        Intent activityIntent = new Intent(this, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0, activityIntent, 0);
+
 
         Intent broadcastIntent = new Intent(this, NotificationReceiver.class);
-        broadcastIntent.putExtra("toastMessage", "LeeeeeeeeRoooooy JeeeeeKiiiin");
         PendingIntent actionIntent = PendingIntent.getBroadcast(this,
                 0 , broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Intent broadcastIntent2 = new Intent(this, NotificationReceiver.class);
-        broadcastIntent2.putExtra("toastMessage", "aasdfsjaxc");
-        PendingIntent actionIntent2 = PendingIntent.getBroadcast(this,
-                0 , broadcastIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_search)
-                .setContentTitle("Helllllloooooooo")
-                .setContentText("adlfjaslfasdf")
-                .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setColor(Color.BLUE)
-                .setContentIntent(contentIntent)
-                .setAutoCancel(true)
-                .setOnlyAlertOnce(true)
-                .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)
-                .addAction(R.mipmap.ic_launcher, "Toast 2", actionIntent2)
-                .build();
-        notificationManager.notify(1,notification);
+        if (alarmManager != null) {
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 15000, actionIntent);
+        }
+
+
     }
+
+
 
 }

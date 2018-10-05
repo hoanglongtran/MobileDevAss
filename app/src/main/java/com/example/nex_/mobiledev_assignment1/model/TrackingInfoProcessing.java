@@ -44,7 +44,7 @@ public class TrackingInfoProcessing {
         {
             //Get and store all tracking info
             DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
-            String searchDate = "05/07/2018 1:00:00 PM";
+            String searchDate = "10/10/2018 1:00:00 PM";
             int searchWindow = 60; // +/- 5 mins
             Date date = dateFormat.parse(searchDate);
             data = trackingService
@@ -180,7 +180,7 @@ public class TrackingInfoProcessing {
 
     private static String getTime(){
         //This one is to test the get current location method, which will return the location at 1:15
-        return "1:12";
+        return "1:20";
         //This one will return the date from the system
         //return new SimpleDateFormat("h:mm").format(new java.util.Date());
     }

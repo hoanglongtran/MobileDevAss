@@ -1,8 +1,11 @@
 package com.example.nex_.mobiledev_assignment1.controller;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.View;
 
+import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
 import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableListActivity;
 
 public class TrackableListButtonListener implements View.OnClickListener{
@@ -25,4 +28,13 @@ public class TrackableListButtonListener implements View.OnClickListener{
 
 
     }
+
+    private static class DatabaseAsyncTask extends AsyncTask<Context,Void, Void> {
+        @Override
+        protected Void doInBackground(Context... contexts) {
+            TrackingList.getInstance().setTrackingList(TrackingList.getInstance().getTracking(contexts[0]));
+            return null;
+        }
+    }
+
 }

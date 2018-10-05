@@ -23,8 +23,8 @@ public class DeleteEventListener extends FragmentActivity implements View.OnClic
         // Code here executes on main thread after user presses button
         int pickedEvent = AddTrackingActivity.getPickedEvent();
         TrackingList.getInstance().deleteTracking(pickedEvent);
-        TrackingListActivity.getmTrackingTitle().remove(pickedEvent);
-        TrackingListActivity.getmTrackingMeetTime().remove(pickedEvent);
+        //TrackingListActivity.getmTrackingTitle().remove(pickedEvent);
+        //TrackingListActivity.getmTrackingMeetTime().remove(pickedEvent);
         ParentActivity.setIsEdit(false);
         Intent goBack = new Intent(v.getContext(), TrackingListActivity.class);
         goBack.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

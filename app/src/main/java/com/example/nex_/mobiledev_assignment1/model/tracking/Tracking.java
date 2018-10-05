@@ -19,6 +19,9 @@ public class Tracking  {
         this.meetLocation = meetLocation;
     }
 
+    public String getTrackingID() {
+        return trackingID;
+    }
 
     public String getTitle() {
         return title;

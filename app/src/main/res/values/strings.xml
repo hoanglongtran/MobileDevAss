@@ -40,7 +40,6 @@
     <string name="trackable">Trackable</string>
 
 
-
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
@@ -117,4 +116,5 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
