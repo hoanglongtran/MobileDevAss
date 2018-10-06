@@ -1,4 +1,5 @@
 
+
 package com.example.nex_.mobiledev_assignment1.model;
 
 import android.util.Log;
@@ -11,12 +12,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import mad.topic7.Topic7Activity;
+
 
 // example of HttpURLConnection by Caspar, updated sem 2, 2018
 public class HttpURLConnectionAsyncTask extends AbstractHttpAsyncTask
 {
    private final String LOG_TAG = HttpURLConnectionAsyncTask.class.getName();
+
+   public static String TEST_URL = "https://developer.android.com/";
 
    public HttpURLConnectionAsyncTask(Topic7Activity activity)
    {
@@ -110,4 +113,5 @@ public class HttpURLConnectionAsyncTask extends AbstractHttpAsyncTask
       Log.i(LOG_TAG, sb.toString());
    }
 }
+
 

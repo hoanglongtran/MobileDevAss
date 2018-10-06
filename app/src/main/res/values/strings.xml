@@ -38,6 +38,7 @@
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
     <string name="trackable">Trackable</string>
+    <string name="travel_time">Travel Time</string>
 
 
     <!-- Strings related to Settings -->

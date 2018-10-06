@@ -39,22 +39,10 @@ import com.google.android.gms.common.GoogleApiAvailability;
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
-    private GoogleMap mMap;
+    GoogleMap map;
 
     private Context mContext;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
 
     //private MapView mapView;
     @Override
@@ -67,8 +55,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         Controller.getInstance().getTrackingData(this);
 
         //Add a floating button to get location
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(GetCurrentLocationListener.getInstance());
+
 
 
 
@@ -101,6 +88,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+
     public boolean isServiceOK(){
         Log.d(TAG, "isServiceOK: checking google service version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
@@ -132,12 +120,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Sydney, Australia, and move the camera.
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        map = googleMap;
+        GetCurrentLocationListener currentLocationListener = new GetCurrentLocationListener(map);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(currentLocationListener);
     }
 
     //Setup the notification

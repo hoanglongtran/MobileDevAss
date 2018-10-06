@@ -131,9 +131,9 @@
                 android:id="@+id/textView9"
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="253dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
+                android:layout_marginEnd="253dp"
                 android:text="@string/meet_location"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -143,11 +143,34 @@
                 android:id="@+id/trackingMeetLocation"
                 android:layout_width="354dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="300dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
+                android:layout_marginEnd="300dp"
                 android:ems="10"
                 android:hint="@string/meet_location"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="253dp"
+                android:text="@string/travel_time"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/trackingTravelTime"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="300dp"
+                android:ems="10"
+                android:hint="@string/travel_time"
                 android:textSize="18sp" />
 
             <Button

@@ -1,10 +1,10 @@
 
+
 package com.example.nex_.mobiledev_assignment1.model;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
-import mad.topic7.Topic7Activity;
 
 // example of HttpURLConnection by Caspar, updated sem 2, 2018
 public abstract class AbstractHttpAsyncTask extends AsyncTask<Void, Integer, Void>
@@ -14,7 +14,7 @@ public abstract class AbstractHttpAsyncTask extends AsyncTask<Void, Integer, Voi
    protected StringBuilder htmlStringBuilder = new StringBuilder();
 
    // this one has a valid CONTENT_LENGTH header
-   public static final String TEST_URL = "https://developer.android.com/";
+
 
    // this one does not always set the content length so makes progress tracking
    // difficult
@@ -36,11 +36,12 @@ public abstract class AbstractHttpAsyncTask extends AsyncTask<Void, Integer, Voi
       else
       {
          // Log.i(LOG_TAG, "Task progress=" + progress[0] + "%");
-         activity.updateProgress(progress[0]);
+         //activity.updateProgress(progress[0]);
       }
    }
 
-   protected void doProgress(int charsRead, int length)
+
+  /*protected void doProgress(int charsRead, int length)
    {
       this.charsRead += charsRead;
       // delay allows us to see progress on fast network!
@@ -49,7 +50,8 @@ public abstract class AbstractHttpAsyncTask extends AsyncTask<Void, Integer, Voi
       int progress = (int) ((double) this.charsRead / length * 100.0);
       Log.i(LOG_TAG, Integer.toString(progress) + "%");
       publishProgress(progress);
-   }
+   }*/
+
 
    @Override
    protected void onPostExecute(Void result)
@@ -57,4 +59,5 @@ public abstract class AbstractHttpAsyncTask extends AsyncTask<Void, Integer, Voi
       activity.displayHTML(htmlStringBuilder.toString());
    }
 }
+
 

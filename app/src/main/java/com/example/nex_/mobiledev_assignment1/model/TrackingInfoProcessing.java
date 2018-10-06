@@ -32,6 +32,8 @@ public class TrackingInfoProcessing {
     private static final Pattern longitudeRegex = Pattern.compile(".*long=(-?\\d*\\.?\\d*).*");
     private static final Pattern latitudeRegex = Pattern.compile(".*lat=(-?\\d*\\.\\d*).*");
     private static final Pattern timeRegex = Pattern.compile(".*Date\\/Time=(\\d{1,2}\\/\\d{1,2}\\/\\d{2} \\d{1,2}:\\d{2}:\\d{2} (AM|PM))");
+    private static String currentLongtitude = "";
+    private static String currentLattitude = "";
 
 
 
@@ -153,8 +155,7 @@ public class TrackingInfoProcessing {
 
     //Compare system time with tracking data then extract the location of matching time
     public static String getCurrentLocation(){
-        String longitude = "";
-        String latitude = "";
+
         String time = getTime();
         for (int i = 0; i < currentTrackableData.size(); i++){
 
@@ -164,15 +165,15 @@ public class TrackingInfoProcessing {
                 Matcher currentLong = longitudeRegex.matcher(currentTrackableData.get(i));
                 Matcher currentLat = latitudeRegex.matcher(currentTrackableData.get(i));
                 if(currentLong.find()) {
-                    longitude = currentLong.group(1);
+                    currentLongtitude = currentLong.group(1);
                 }
                 if (currentLat.find()) {
-                    latitude = currentLat.group(1);
+                    currentLattitude = currentLat.group(1);
                 }
             }
 
         }
-        String currentLocation = latitude +", "+longitude;
+        String currentLocation = currentLattitude +", "+currentLongtitude;
         currentTrackableData.clear();
 
         return currentLocation;
@@ -198,5 +199,13 @@ public class TrackingInfoProcessing {
 
     public static int getCurrentTrackableID() {
         return currentTrackableID;
+    }
+
+    public static String getCurrentLongtitude() {
+        return currentLongtitude;
+    }
+
+    public static String getCurrentLattitude() {
+        return currentLattitude;
     }
 }

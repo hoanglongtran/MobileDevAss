@@ -8,18 +8,31 @@ import android.view.View;
 
 import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GetCurrentLocationListener extends FragmentActivity implements View.OnClickListener  {
-    private static final GetCurrentLocationListener ourInstance = new GetCurrentLocationListener();
 
-    public static GetCurrentLocationListener getInstance() {
-        return ourInstance;
+    private GoogleMap mMap;
+
+    public GetCurrentLocationListener(GoogleMap googleMap) {
+        this.mMap = googleMap;
     }
-    private GetCurrentLocationListener() {
-    }
+
     @Override
     public void onClick(View v) {
         // Code here executes on main thread after user presses button
+
+        double lattitude =  Double.parseDouble(TrackingInfoProcessing.getCurrentLattitude());
+        double longtitude = Double.parseDouble(TrackingInfoProcessing.getCurrentLongtitude());
+        // Add a marker in Sydney, Australia, and move the camera.
+        LatLng sydney = new LatLng(lattitude, longtitude);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
                 Controller.getInstance().setCurrentTrackable(ParentActivity.getTrackedTrackableID());
                 String currentLocation = TrackingInfoProcessing.getCurrentLocation();
                 Snackbar.make(v, currentLocation, Snackbar.LENGTH_LONG)
