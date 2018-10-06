@@ -1,5 +1,6 @@
 package com.example.nex_.mobiledev_assignment1.view.trackable;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +35,13 @@ public class TrackableListActivity extends ParentActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trackable_list);
+
+        addPermissionHelper(REQUEST_WRITE_STORAGE,
+                "we need to write storage .. coz!", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+
+        testPermissions();
+
         Log.d(TAG, "onCreate: started");
         if (key){
             //prevent initialize objects twice

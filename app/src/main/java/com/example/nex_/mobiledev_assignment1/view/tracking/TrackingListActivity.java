@@ -28,6 +28,7 @@ public class TrackingListActivity extends ParentActivity {
     //private SQLiteDatabase mDatabase;
     private TrackingListRecycleViewAdapter mAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

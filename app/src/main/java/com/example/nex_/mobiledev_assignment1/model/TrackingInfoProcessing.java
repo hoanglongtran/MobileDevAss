@@ -179,8 +179,19 @@ public class TrackingInfoProcessing {
     }
 
     private static String getTime(){
+        Date currentTime;
+        Calendar calendar = Calendar.getInstance();
+
+
+        int unroundedMinutes = calendar.get(Calendar.MINUTE);
+        int mod = unroundedMinutes % 5;
+        calendar.add(Calendar.MINUTE, -mod);
+
+
+        String time = new SimpleDateFormat("h:m").format(calendar.getTime());
+        return time ;
         //This one is to test the get current location method, which will return the location at 1:15
-        return "1:20";
+        //return "1:20";
         //This one will return the date from the system
         //return new SimpleDateFormat("h:mm").format(new java.util.Date());
     }

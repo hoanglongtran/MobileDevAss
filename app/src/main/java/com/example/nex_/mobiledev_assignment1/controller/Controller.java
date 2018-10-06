@@ -13,6 +13,7 @@ import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableIO;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 import com.example.nex_.mobiledev_assignment1.model.tracking.Tracking;
 import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
+import com.example.nex_.mobiledev_assignment1.view.App;
 
 import java.util.UUID;
 
@@ -76,7 +77,7 @@ public class Controller {
     //Call delete tracking from DataBaseHelper and reload the Tracking ArrayList
     public void deleteTracking(Context context, String ID){
         if (DatabaseHelper.getInstance(context).deleteTrackingData(ID)){
-            TrackingListButtonListener.DatabaseAsyncTask task = new TrackingListButtonListener.DatabaseAsyncTask();
+            App.DatabaseAsyncTask task = new App.DatabaseAsyncTask();
             task.execute(context);
             System.out.println("Delete Tracking Succeed");
 

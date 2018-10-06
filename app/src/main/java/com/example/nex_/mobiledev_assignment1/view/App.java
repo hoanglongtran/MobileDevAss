@@ -3,8 +3,10 @@ package com.example.nex_.mobiledev_assignment1.view;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.view.View;
 
@@ -12,6 +14,7 @@ import com.example.nex_.mobiledev_assignment1.model.NetworkReceiver;
 import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
 
 public class App extends Application {
+    private static final String LOG_TAG = "App";
     public static final String CHANNEL_1_ID = "channel1";
     NetworkReceiver networkReceiver = new NetworkReceiver();
     //This will be called as soon as we start the app
@@ -22,6 +25,8 @@ public class App extends Application {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkReceiver, filter);
         createNotificationChannels();
+        DatabaseAsyncTask task = new DatabaseAsyncTask();
+        task.execute(this);
     }
 
 
@@ -41,7 +46,15 @@ public class App extends Application {
         }
     }
 
-    public void startThread(View view){
+    public static class DatabaseAsyncTask extends AsyncTask<Context,Void, Void> {
+        @Override
+        protected Void doInBackground(Context... contexts) {
+            TrackingList.getInstance().setTrackingList(TrackingList.getInstance().getTracking(contexts[0]));
+            return null;
+        }
+    }
+
+   /* public void startThread(View view){
         DatabaseThread thread = new DatabaseThread(view);
         thread.start();
     }
@@ -56,5 +69,5 @@ public class App extends Application {
         public void run() {
             TrackingList.getInstance().setTrackingList(TrackingList.getInstance().getTracking(view.getContext()));
         }
-    }
+    }*/
 }

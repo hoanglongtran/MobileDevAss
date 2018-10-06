@@ -19,18 +19,11 @@ public class TrackingListButtonListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        DatabaseAsyncTask task = new DatabaseAsyncTask();
-        task.execute(v.getContext());
-                Intent trackableDetail = new Intent(v.getContext(), TrackingListActivity.class);
-                v.getContext().startActivity(trackableDetail);
+
+        Intent trackableDetail = new Intent(v.getContext(), TrackingListActivity.class);
+        v.getContext().startActivity(trackableDetail);
 
     }
 
-    public static class DatabaseAsyncTask extends AsyncTask<Context,Void, Void> {
-        @Override
-        protected Void doInBackground(Context... contexts) {
-            TrackingList.getInstance().setTrackingList(TrackingList.getInstance().getTracking(contexts[0]));
-            return null;
-        }
-    }
+
 }

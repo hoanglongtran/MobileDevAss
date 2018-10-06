@@ -1,14 +1,45 @@
 package com.example.nex_.mobiledev_assignment1.view;
 
 
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
-import com.example.nex_.mobiledev_assignment1.R;
+import android.view.View;
 
-public abstract class ParentActivity extends AppCompatActivity {
+import com.example.nex_.mobiledev_assignment1.R;
+import com.example.nex_.mobiledev_assignment1.model.PermissionHelper;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public abstract class ParentActivity extends PermissionActivity {
     protected static boolean isEdit;
     protected static String currentLocation;
     protected static int trackedTrackableID;
+    private Map<Integer, PermissionHelper> helpers = new HashMap<>();
+    // store main layout for use by permissions Snackbar
+    private View layout;
+
+    private String LOG_TAG = this.getClass().getName();
+
+    // this is just an arbitrary static id for the PermissionActivity
+    public static final int REQUEST_WRITE_STORAGE = 1;
+
+
+
+
+    public void testPermissions()
+    {
+        Log.i(LOG_TAG, "testPermissions()");
+        // call superclass method to check if permission has been granted
+        // we assume we would require this permisison but are just logging in this example
+        if(checkPermission(REQUEST_WRITE_STORAGE))
+        {
+            Log.i(LOG_TAG, "permission granted to perform action");
+            // TODO do something that requires the requested permission ..
+        }
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
