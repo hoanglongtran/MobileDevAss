@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.model.DatabaseHelper;
+import com.example.nex_.mobiledev_assignment1.model.SuggestionManager;
 import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
 import com.example.nex_.mobiledev_assignment1.view.trackable.TrackableListActivity;
@@ -36,6 +37,7 @@ public class TrackingListActivity extends ParentActivity {
         setContentView(R.layout.activity_tracking_list);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.trackingRecycleView);
 
+        //Swipe to delete
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                                         ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -49,9 +51,13 @@ public class TrackingListActivity extends ParentActivity {
             }
         }).attachToRecyclerView(recyclerView);
 
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
         mAdapter = new TrackingListRecycleViewAdapter(this, DatabaseHelper.getInstance(this).getAllItems());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
 
     }
 

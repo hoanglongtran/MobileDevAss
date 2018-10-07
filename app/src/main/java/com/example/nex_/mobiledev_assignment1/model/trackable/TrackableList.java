@@ -13,6 +13,7 @@ public class TrackableList {
     private ArrayList<Trackable> trackablesList;
     private ArrayList<String> trackableNames;
     private ArrayList<String> trackableCategory;
+    private ArrayList<Integer> trackableIDList;
 
     public ArrayList<Trackable> getTrackablesList() {
         return trackablesList;
@@ -22,15 +23,21 @@ public class TrackableList {
         trackablesList = new ArrayList<>();
         trackableNames = new ArrayList<>();
         trackableCategory = new ArrayList<>();
+        trackableIDList = new ArrayList<>();
     }
 
     public void addTrackables(int ID, String name, String trackableDes, String URL, String category){
         Trackable trackable = new Trackable(ID, name, trackableDes, URL, category);
+        trackableIDList.add(ID);
         trackablesList.add(trackable);
         trackableNames.add(name);
         trackableCategory.add(category);
+
     }
 
+    public ArrayList<Integer> getTrackableIDList() {
+        return trackableIDList;
+    }
     public ArrayList<String> getTrackableNames() {
         return trackableNames;
     }

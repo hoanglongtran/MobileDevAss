@@ -27,12 +27,12 @@ public abstract class ParentActivity extends PermissionActivity {
 
 
 
-    public void testPermissions()
+    public void testPermissions(int requestID)
     {
         Log.i(LOG_TAG, "testPermissions()");
         // call superclass method to check if permission has been granted
         // we assume we would require this permisison but are just logging in this example
-        if(checkPermission(REQUEST_WRITE_STORAGE))
+        if(checkPermission(requestID))
         {
             Log.i(LOG_TAG, "permission granted to perform action");
             // TODO do something that requires the requested permission ..

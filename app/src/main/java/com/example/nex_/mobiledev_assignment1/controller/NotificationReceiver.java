@@ -30,7 +30,7 @@ public class NotificationReceiver extends BroadcastReceiver {
             Toast.makeText(context, "Alarm Canceled", Toast.LENGTH_SHORT).show();
         }else{
             String message = intent.getStringExtra("toastMessage");
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Skipped", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -43,7 +43,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
 
         Intent broadcastIntent2 = new Intent(context, NotificationReceiver.class);
-        broadcastIntent2.putExtra("cancel", "aasdfsjaxc");
+        broadcastIntent2.putExtra("cancel", "Suggestion canceled");
         PendingIntent actionIntent2 = PendingIntent.getBroadcast(context,
                 1 , broadcastIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -57,8 +57,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
-                .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)
-                .addAction(R.mipmap.ic_launcher, "Toast 2", actionIntent2)
+                .addAction(R.mipmap.ic_launcher, "Skip", actionIntent)
+                .addAction(R.mipmap.ic_launcher, "Cancel", actionIntent2)
                 .build();
         notificationManager.notify(1,notification);
     }

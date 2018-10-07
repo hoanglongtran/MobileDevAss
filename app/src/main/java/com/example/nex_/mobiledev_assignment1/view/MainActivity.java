@@ -1,5 +1,6 @@
 package com.example.nex_.mobiledev_assignment1.view;
 
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
@@ -23,6 +24,7 @@ import com.example.nex_.mobiledev_assignment1.controller.TrackingListButtonListe
 import com.example.nex_.mobiledev_assignment1.controller.TrackableListButtonListener;
 import com.example.nex_.mobiledev_assignment1.controller.GetCurrentLocationListener;
 import com.example.nex_.mobiledev_assignment1.controller.NotificationReceiver;
+import com.example.nex_.mobiledev_assignment1.model.JSONGetterAsyncTask;
 import com.example.nex_.mobiledev_assignment1.model.NetworkReceiver;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -36,9 +38,10 @@ import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
-public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MainActivity extends ParentActivity  implements OnMapReadyCallback {
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
+    public static final int REQUEST_LOCATION = 0;
     GoogleMap map;
 
     private Context mContext;
@@ -50,33 +53,25 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         //Read through the file to get tracking data
         Controller.getInstance().getTrackingData(this);
 
+
+        //Request location permission
+        addPermissionHelper(REQUEST_LOCATION,
+                findViewById(R.id.drawer_layout),"Location Permission Required", Manifest.permission.ACCESS_FINE_LOCATION);
+        testPermissions(REQUEST_LOCATION);
+
+
+
         //Add a floating button to get location
-
-
-
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //MapView, used for assignment 2
-        //mapView = (MapView)findViewById(R.id.map);
-        //mapView.onCreate(savedInstanceState);
-        isServiceOK();
-            /*mapView.getMapAsync(new OnMapReadyCallback() {
-                @Override
-                public void onMapReady(GoogleMap googleMap) {
-                    googleMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(37.7750, 122.4183))
-                            .title("San Francisco")
-                            .snippet("Population: 776733"));
-                }
-            });*/
 
+        isServiceOK();
 
         final Button button = (Button) findViewById(R.id.trackableListButton);
         button.setOnClickListener(TrackableListButtonListener.getInstance());
@@ -121,6 +116,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        //Display current location of a tracking with a marker
         GetCurrentLocationListener currentLocationListener = new GetCurrentLocationListener(map);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(currentLocationListener);

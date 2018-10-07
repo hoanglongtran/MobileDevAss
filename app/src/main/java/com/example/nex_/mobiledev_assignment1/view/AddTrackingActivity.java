@@ -19,6 +19,7 @@ import com.example.nex_.mobiledev_assignment1.controller.Controller;
 import com.example.nex_.mobiledev_assignment1.controller.DeleteEventListener;
 import com.example.nex_.mobiledev_assignment1.controller.GetCurrentLocationListener;
 import com.example.nex_.mobiledev_assignment1.R;
+import com.example.nex_.mobiledev_assignment1.controller.TimePickerListener;
 import com.example.nex_.mobiledev_assignment1.model.TrackingInfoProcessing;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
@@ -69,15 +70,10 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
             delete.setOnClickListener(DeleteEventListener.getInstance());
         }
 
+
         //Calling this from Listener class will cause java.lang.IllegalStateException
         Button button = (Button) findViewById(R.id.timePicker);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                android.support.v4.app.DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "time picker");
-            }
-        });
+        button.setOnClickListener(TimePickerListener.getInstance());
 
 
     }
@@ -238,7 +234,6 @@ public class AddTrackingActivity extends ParentActivity implements TimePickerDia
             //pickedEvent = getIntent().getIntExtra("clicked_position", 0);
             setEditTrackingDetail();
         }
-
 
     }
 

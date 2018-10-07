@@ -15,7 +15,6 @@ public class Trackable {
     private String stationaryEndTime = "";
     private int chosenStationary;
 
-    //How should I create interface and abstract for a class that only holds variables?
 
     Trackable(int trackabelID, String name, String trackableDes, String URL, String category) {
         this.trackabelID = trackabelID;

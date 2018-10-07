@@ -32,8 +32,8 @@ public class TrackingInfoProcessing {
     private static final Pattern longitudeRegex = Pattern.compile(".*long=(-?\\d*\\.?\\d*).*");
     private static final Pattern latitudeRegex = Pattern.compile(".*lat=(-?\\d*\\.\\d*).*");
     private static final Pattern timeRegex = Pattern.compile(".*Date\\/Time=(\\d{1,2}\\/\\d{1,2}\\/\\d{2} \\d{1,2}:\\d{2}:\\d{2} (AM|PM))");
-    private static String currentLongtitude = "";
-    private static String currentLattitude = "";
+    private static String currentLongtitude = "0";
+    private static String currentLattitude = "0";
 
 
 
@@ -133,7 +133,6 @@ public class TrackingInfoProcessing {
                             e.printStackTrace();
                         }
 
-
                         if (v.find()) {
                             longitude = Double.parseDouble(v.group(1));
                             TrackableList.getInstance().getTrackablesList().get(currentTrackableIndex).setStationaryLong(longitude);
@@ -183,18 +182,14 @@ public class TrackingInfoProcessing {
         Date currentTime;
         Calendar calendar = Calendar.getInstance();
 
-
         int unroundedMinutes = calendar.get(Calendar.MINUTE);
         int mod = unroundedMinutes % 5;
         calendar.add(Calendar.MINUTE, -mod);
-
 
         String time = new SimpleDateFormat("h:m").format(calendar.getTime());
         return time ;
         //This one is to test the get current location method, which will return the location at 1:15
         //return "1:20";
-        //This one will return the date from the system
-        //return new SimpleDateFormat("h:mm").format(new java.util.Date());
     }
 
     public static int getCurrentTrackableID() {

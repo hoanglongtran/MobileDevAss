@@ -11,6 +11,7 @@ import android.os.Build;
 import android.view.View;
 
 import com.example.nex_.mobiledev_assignment1.model.NetworkReceiver;
+import com.example.nex_.mobiledev_assignment1.model.SuggestionManager;
 import com.example.nex_.mobiledev_assignment1.model.tracking.TrackingList;
 
 public class App extends Application {
@@ -27,6 +28,7 @@ public class App extends Application {
         createNotificationChannels();
         DatabaseAsyncTask task = new DatabaseAsyncTask();
         task.execute(this);
+
     }
 
 

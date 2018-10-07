@@ -15,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 
 import com.example.nex_.mobiledev_assignment1.R;
 import com.example.nex_.mobiledev_assignment1.controller.Controller;
+import com.example.nex_.mobiledev_assignment1.model.SuggestionManager;
 import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 import com.example.nex_.mobiledev_assignment1.view.ParentActivity;
 
@@ -37,10 +38,10 @@ public class TrackableListActivity extends ParentActivity {
         setContentView(R.layout.activity_trackable_list);
 
         addPermissionHelper(REQUEST_WRITE_STORAGE,
-                "we need to write storage .. coz!", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                findViewById(R.id.coordinatorLayout),"Storage Permission Required", Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 
-        testPermissions();
+        testPermissions(REQUEST_WRITE_STORAGE);
 
         Log.d(TAG, "onCreate: started");
         if (key){
@@ -59,7 +60,8 @@ public class TrackableListActivity extends ParentActivity {
         }
         setSupportActionBar(myToolbar);
         initName();
-
+        SuggestionManager manager= new SuggestionManager();
+        manager.something();
     }
 
     private void initName(){

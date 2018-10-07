@@ -51,12 +51,12 @@ public abstract class PermissionActivity extends AppCompatActivity
      * @param rationale - a user readable string explaining the reason for the permission request
      * @param permissions - variable length arg of String permissions to request
      */
-    protected void addPermissionHelper(int requestCode, String rationale, String... permissions)
+    protected void addPermissionHelper(int requestCode, View v,String rationale, String... permissions)
     {
         // lazy initialisation and pre-condition checking
         if(layout == null)
         {
-            layout = findViewById(R.id.coordinatorLayout);
+            layout = v;
             if (layout == null)
                 throw new IllegalArgumentException("Root view must contain a permission_view ID in the layout hierarchy");
         }
