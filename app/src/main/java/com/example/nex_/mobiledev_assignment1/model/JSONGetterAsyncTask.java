@@ -13,19 +13,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Locale;
 
-public class JSONGetterAsyncTask extends AsyncTask<String, Void, String> {
+public class JSONGetterAsyncTask extends AsyncTask<String, Void, Void> {
     private static final String LOG_TAG = "JSONGetterAsyncTask";
     private static final String URL = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=";
     private static String origin = "-37.807425,144.963814";
     private static final String destinatinURL = "&destinations=";
     private static String destination = "-37.820666,144.958277";
     private static final String walkingModeAndKey = "&mode=walking&key=";
-    private static final String APIKey = "AIzaSyBhcmusCO0QY_Im9bTOuDEXfnYD7NyZo_8";
-    private static String distanceText = "";
-    private static int distanceValue = 0;
-
-    private static String durationText = "";
-    private static int durationValue = 0;
+    private static final String APIKey = "AIzaSyCLgWPZq17ieziKSyQ_Rcej1V7J2g9q3t4";
+    public static String distanceText = "";
+    public static int distanceValue = 0;
+    public static String durationText = "";
+    public static int durationValue = 0;
 
     @Override
     protected void onPreExecute() {
@@ -34,7 +33,7 @@ public class JSONGetterAsyncTask extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected String doInBackground(String... locations) {
+    protected Void doInBackground(String... locations) {
         String jsonString;
         //origin = locations[0];
         destination = locations[0];
@@ -68,7 +67,7 @@ public class JSONGetterAsyncTask extends AsyncTask<String, Void, String> {
             jsonString = buffer.toString();
 
             testJSON(jsonString);
-            return jsonString;
+            return null;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,11 +90,17 @@ public class JSONGetterAsyncTask extends AsyncTask<String, Void, String> {
         JSONObject distance = elements2.getJSONObject("distance");
         JSONObject duration = elements2.getJSONObject("duration");
 
+        /*SuggestionManager suggestionManager = new SuggestionManager();
+        suggestionManager.setDistanceText(distance.getString("text"));
+        suggestionManager.setDistanceValue(distance.getInt("value"));
+        suggestionManager.setTravelTimeText(duration.getString("text"));
+        suggestionManager.setTravelTimeValue(duration.getInt("value"));*/
         distanceText = distance.getString("text");
         distanceValue = distance.getInt("value");
 
         durationText = duration.getString("text");
         durationValue = duration.getInt("value");
+
 
         Log.d("Response: ", "> distance Text " + distanceText);
         Log.d("Response: ", "> distance Value " + distanceValue);
@@ -108,7 +113,17 @@ public class JSONGetterAsyncTask extends AsyncTask<String, Void, String> {
                             .getString("number")));*/
     }
 
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        int currentTrackableID = SuggestionManager.currentTrackableID;
+        Suggestion suggestion = new Suggestion(currentTrackableID,distanceText, distanceValue, durationText, durationValue);
+        SuggestionManager.suggestionsList.add(suggestion);
+    }
+
     protected void onPostExecute(Boolean result) {
+
+
     }
 
     public static String getDistanceText() {

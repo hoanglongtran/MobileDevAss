@@ -192,6 +192,14 @@ public class TrackingInfoProcessing {
         //return "1:20";
     }
 
+    public static void setCurrentLongtitude(String currentLongtitude) {
+        TrackingInfoProcessing.currentLongtitude = currentLongtitude;
+    }
+
+    public static void setCurrentLattitude(String currentLattitude) {
+        TrackingInfoProcessing.currentLattitude = currentLattitude;
+    }
+
     public static int getCurrentTrackableID() {
         return currentTrackableID;
     }

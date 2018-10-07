@@ -12,11 +12,14 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.widget.Toast;
 
 import com.example.nex_.mobiledev_assignment1.R;
+import com.example.nex_.mobiledev_assignment1.model.SuggestionManager;
+import com.example.nex_.mobiledev_assignment1.model.trackable.TrackableList;
 import com.example.nex_.mobiledev_assignment1.view.MainActivity;
 
 import static com.example.nex_.mobiledev_assignment1.view.App.CHANNEL_1_ID;
 
 public class NotificationReceiver extends BroadcastReceiver {
+    private int index = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -34,6 +37,10 @@ public class NotificationReceiver extends BroadcastReceiver {
         }
 
 
+        String name = TrackableList.getInstance().getTrackablesList().get(SuggestionManager.suggestionsList.get(index).getTrackableID()).getName();
+        String distanceText = SuggestionManager.suggestionsList.get(index).getDistanceText();
+        String travelTimeText = SuggestionManager.suggestionsList.get(index).getTravelTimeText();
+
 
         Intent broadcastIntent = new Intent(context, NotificationReceiver.class);
         broadcastIntent.putExtra("toastMessage", "LeeeeeeeeRoooooy JeeeeeKiiiin");
@@ -49,8 +56,8 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_search)
-                .setContentTitle("Helllllloooooooo")
-                .setContentText("adlfjaslfasdf")
+                .setContentTitle(name + " is " + distanceText + " away from you")
+                .setContentText("Travel time from your location will take " + travelTimeText)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setColor(Color.BLUE)
@@ -61,6 +68,10 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .addAction(R.mipmap.ic_launcher, "Cancel", actionIntent2)
                 .build();
         notificationManager.notify(1,notification);
+        index++;
+        if (index > SuggestionManager.suggestionsList.size()){
+            index = 0;
+        }
     }
 
     public void cancelAlarm(Context context){

@@ -61,7 +61,7 @@ public class TrackableListActivity extends ParentActivity {
         setSupportActionBar(myToolbar);
         initName();
         SuggestionManager manager= new SuggestionManager();
-        manager.something();
+        manager.getDistanceInfo();
     }
 
     private void initName(){
